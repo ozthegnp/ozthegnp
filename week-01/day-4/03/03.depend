@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1507191954 source:/Users/Oz/greenfox/ozthegnp/week-01/day-4/03/main.c
+	<stdio.h>
+	<stdint.h>
+
