@@ -2,8 +2,8 @@
 
 int main()
 {
-    for(int i = 1; i < 9; i++){
-           switch(i) {
+    for(int a = 1; a < 9; a++){
+           switch(a) {
             case 1:
             case 8:
                 printf("      *\n");
@@ -20,34 +20,27 @@ int main()
                 printf("* * * * * * *\n");
            }
     }
-    return 0;
-}
-  /*  int d = 4, dl, space;
 
-        for (int a = -d ; a <= d; a++){
-            dl = abs(a);
+    int d = 4;
+
+    /*printf("Enter diamond size:" ); //this for any size diamond with input
+    scanf(" %d", &d);*/
+
+    for (int i = -d; i <= d; i++){
+        if (i != 0){
+            for (int s = 3; s <= 2 * abs(i); s++){
+                printf(" ");
+            }
+            for (int s = 0; s <= (2 * d) - (2 * abs(i)); s++){
+                printf("* ");
+            }
             printf("\n");
-                for (space = 1 ; space <= dl; space++ ){
-                    printf("* ");
-                }
-                for(space = -dl+1; space <= dl-1; space++ ){
-                    printf("*");
-                }
         }
 
-    return 0;
-}*/
-/*int d = 4, dl, space;
-
-        for (int a = 1 ; a = d ; a++){
-            printf("\n");
-                for (space = 1 ; space <= 2*d; space++ ){
-                    printf("* ");
-                }
-        }
-
+    }
     return 0;
 }
+
 
 /*
 create a program which draws a diamond, like this:

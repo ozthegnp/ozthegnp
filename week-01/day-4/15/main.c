@@ -28,7 +28,7 @@ int main()
     int deak = 20000, istv = 10000, koss =5000, beth = 2000, maty = 1000, rako = 500;
     int kets = 200, szaz = 100, otven = 50, husz = 20, tiz = 10, ot = 5;
 
-printf("Amount due %dFt\n",aom);
+printf("Amount due %dFt\n", aom);
       switch(aom % 10){
             case 1:
             case 2:
@@ -89,8 +89,6 @@ printf("Pay your amount due with these bills: \n");
 
             (aom/ot > 0 ? printf(" %d-%dFt\n",aom/ot, ot):0);
             aom = (aom % ot) - (aom/ot);
-
-
 
     return 0;
 }
