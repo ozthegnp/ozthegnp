@@ -8,27 +8,24 @@ use Euclid's algorithm, if you don't know it look it up on the internet
 
 int main()
 {
-    int x = 32;
-    int y = 20;
-    int z, gcd = 0, rmdr = 1;
+    int x = 50;
+    int y = 100;
+    int z, gcd, rmdr = 1;
 
-    if(x<y){
-        z = x;
-        x = y;
-        y = z;
-    } else{
-        while(rmdr =! 0){
-            rmdr = x % y;
+    printf("The gcd of %d and %d is:", x, y);
+
+        if (x<y) {
+            z = x;
             x = y;
-            y = rmdr;
-            printf(" %d \n", rmdr);
-            gcd = y;
-
-            }
+            y = z;
         }
-                        printf(" %d", gcd);
-
-    }
+        while (rmdr != 0) {
+                gcd = y;
+                rmdr = x % y;
+                x = y;
+                y = rmdr;
+        }
+    printf(" %d", gcd);
 
     return 0;
 }
