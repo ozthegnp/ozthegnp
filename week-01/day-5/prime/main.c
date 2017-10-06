@@ -28,11 +28,24 @@ int main()
         to = z;
     }
 
+    printf("\nThe primes between %d and %d are:\n", from, to);
+
+    int prime_counter;
+
     for (int i = from; i <= to; i++){
-        if(i % 1 == 0 && i % 1 == 0 ){
+        int dvsr_count=0;
+            for (int k = 2; k <= i-1; k++){
+                if(i % k == 0){
+                    dvsr_count++;
+                }
+            }
+        if (dvsr_count == 0 && i != 1){
             printf("%d ", i);
+            prime_counter++;
         }
     }
+    printf("\nThese are %d primes between these numbers\n", prime_counter);
+
 
     return 0;
 }
