@@ -1,1 +1,1 @@
-#define input 4
+#define input 12

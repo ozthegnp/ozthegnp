@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1507555959 source:/Users/Oz/greenfox/ozthegnp/week-02/day-1/double/main.c
+	<stdio.h>
+	<stdlib.h>
+	"double.h"
+
+1507555940 /Users/Oz/greenfox/ozthegnp/week-02/day-1/double/double.h
+

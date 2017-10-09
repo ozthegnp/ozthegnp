@@ -1,8 +1,9 @@
 # depslib dependency file v1.0
-1507554991 source:/Users/Oz/greenfox/ozthegnp/week-02/day-1/factorio/main.c
+1507555517 source:/Users/Oz/greenfox/ozthegnp/week-02/day-1/factorio/main.c
 	<stdio.h>
 	<stdlib.h>
+	<stdint.h>
 	"factorio.h"
 
-1507555001 /Users/Oz/greenfox/ozthegnp/week-02/day-1/factorio/factorio.h
+1507555592 /Users/Oz/greenfox/ozthegnp/week-02/day-1/factorio/factorio.h
 
