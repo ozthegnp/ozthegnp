@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1507556868 source:/Users/Oz/greenfox/ozthegnp/week-02/day-1/global_local/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"global_local.h"
+
+1507556773 /Users/Oz/greenfox/ozthegnp/week-02/day-1/global_local/global_local.h
+
