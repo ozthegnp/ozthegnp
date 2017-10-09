@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1507549025 source:/Users/Oz/greenfox/ozthegnp/week-02/day-1/includes/another_file.c
+	"another_file.h"
+	<stdint.h>
+	<stdio.h>
+	<stdlib.h>
+
+1507548889 /Users/Oz/greenfox/ozthegnp/week-02/day-1/includes/another_file.h
+
+1507548889 source:/Users/Oz/greenfox/ozthegnp/week-02/day-1/includes/main.c
+	<stdio.h>
+	"another_file.c"
+
+1507549025 /Users/Oz/greenfox/ozthegnp/week-02/day-1/includes/another_file.c
+	"another_file.h"
+	<stdint.h>
+	<stdio.h>
+	<stdlib.h>
+
