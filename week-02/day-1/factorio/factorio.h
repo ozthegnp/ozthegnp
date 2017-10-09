@@ -1,0 +1,1 @@
+#define input 4

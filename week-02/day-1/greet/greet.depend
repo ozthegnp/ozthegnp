@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1507552512 source:/Users/Oz/greenfox/ozthegnp/week-02/day-1/greet/main.c
+	<stdio.h>
+	<stdlib.h>
+	"greenfox.h"
+
+1507552512 /Users/Oz/greenfox/ozthegnp/week-02/day-1/greet/greenfox.h
+
