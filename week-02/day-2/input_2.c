@@ -10,7 +10,7 @@ int main() {
     puts(buffer);// Print it out with puts
 
     // Get the user's pet name with getch
-
+    //getch doesnt work on Mac.
     //TODO:
     // Print it out
 
