@@ -16,9 +16,9 @@ void func(){
     char name[255];
 
     printf("Tell me a number: ");
-    scanf("%d[^\n]", &num);
+    scanf("%d", &num);
     printf("Your number is %d\n", num);
-    gets(name);
+    getchar();
 
     puts("Now tell me your name: ");
     gets(name);
