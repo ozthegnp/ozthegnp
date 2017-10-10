@@ -1,45 +1,46 @@
 #include <stdio.h>
-    // TODO: write a program wich asks for a number, that will be the real size of the array (20 elements are allocated, that's the maximum size)
+// TODO: write a program wich asks for a number, that will be the real size of the array (20 elements are allocated, that's the maximum size)
     // Then load up the array with integer values
     // Finally print all unique elements in array
+
 int arry_sizer();
-void dup_deleter(int dup, int del_size);
-int arry[20];
 
 int main()
 {
-
-    int freq[20];
     int size = arry_sizer();
-
+    int arry[size];
     //ARRAY FILLER
-    char arry[size];
 
-    for (int i = 0; i <= size; i++) {
-        int num = 0;
+    for (int i = 0; i < size; i++) {
+        int input = 0;
         printf("Add a number to position %d:", i);
-        scanf("%d", &num );
-        arry[i] = num;
+        scanf("%d", &input);
+        arry[i] = input;
     }
 
     //ARRAY PRINTER
+    printf("Your array:\n");
+
     for (int j = 0; j < size; j++) {
     printf("%d ", arry[j]);
     }
     printf("\n\n");
 
-    //POSITION DELETER
-
-    for(int k = 0; k < size; k++){
-        for(int l = 0; l < size;l++){
-            if(arry[k] == arry[l]){
-                dup_deleter(k, size);
-                size--;
+    //DUPLICATE ELIMINATOR
+    for(int di = 0; di < size; di++){
+            for(int dj = 1; dj < size;){
+                if(di != dj && arry[di] == arry[dj]){
+                    for (int k = dj; k < size; k++){
+                        arry[k] = arry[k+1];
+                    }
+                    size--;
+                }else
+                    dj++;
             }
-        }
     }
 
     //NEW ARRAY PRINTER
+    printf("Unique values of array:\n");
     for (int m = 0; m < size; m++) {//prints int values
     printf("%d ", arry[m]);
     }
@@ -59,11 +60,4 @@ int size = 0;
             } while(size > 20 || size <= 0);
     }
     return size;
-}
-
-void dup_deleter(int dup, int del_size){;
-
-    for (int k = dup-1; k < del_size; k++){
-        arry[k] = arry[k+1];
-    }
 }
