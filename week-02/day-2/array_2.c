@@ -10,8 +10,8 @@ int main() {
 
     printf("\n");
 
-    for(int i = 0; i < sizeof(char_array_the_same); i++){
-        printf("%c", char_array_the_same[i]);
+    for(int j = 0; j < sizeof(char_array_the_same); j++){
+        printf("%c", char_array_the_same[j]);
     }
 	//TODO:
     // Print out the two arrays character-by-character
