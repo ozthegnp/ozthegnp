@@ -5,13 +5,10 @@ int pos_deleter(int max_del);
 
 int main()
 {
-
-    int arr[50];
     int size = arry_sizer();
+    int arry[size];
 
-    //ARRAY FILLER
-    char arry[size];
-
+    //ARRAY UPLOADING
     for (int i = 0; i <= size; i++) {
         arry[i] = i+1;
     }
@@ -23,11 +20,9 @@ int main()
 
     //POSITION DELETER
     int pos_del = pos_deleter(size);
-
     for (int k = pos_del-1; k < size; k++){
         arry[k] = arry[k+1];
     }
-
     size--;
 
     //NEW ARRAY PRINTER
@@ -36,8 +31,6 @@ int main()
     }
     printf("\n");
     printf("Position %d deleted.\n", pos_del);
-
-
 }
 
 int arry_sizer(){//eliminates invalid numbers
