@@ -5,20 +5,18 @@ int palsearchf(char word[]);
 
 void main()
 {
-    char word[]="";
-    gets(word);
-
+    char word[]="lolol";
     for(int i = 3; i<= strlen(word); i++){
         char subword[i];
-            for(int j = 0; j < strlen(word) - i ; j++){
+            for(int j = 0; j <= strlen(word)-i; j++){
                     for(int k = 0; k < i;k++){
-                        subword[k] = word [j];
-                        puts(subword);
+                        subword[k] = word[k+j];
                     }
+                    puts(subword);
+                    printf("%d\n", palsearchf(subword));
             }
 
     }
-
      if (palsearchf(word))
         printf("Yes");
      else

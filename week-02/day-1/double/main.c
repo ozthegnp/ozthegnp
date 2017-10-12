@@ -15,7 +15,7 @@ int main()
     return 0;
 }
 
-int doubling(int num){
+int doubling(int num)
+{
     return num * 2;
-
 }

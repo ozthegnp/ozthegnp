@@ -14,7 +14,7 @@ int main()
 
     printf("The gcd of %d and %d is:", x, y);
 
-        if (x<y) {
+        if (x < y) {
             z = x;
             x = y;
             y = z;
