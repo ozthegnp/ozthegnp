@@ -4,4 +4,4 @@
 
 [git-lesson-repository](https://github.com/ozthegnp/git-lesson-repository.git)
 
-Enyoj watching them!
+Have a great day!
