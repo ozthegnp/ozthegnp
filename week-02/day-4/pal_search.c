@@ -5,30 +5,22 @@
 
 void main()
 {
-    char word[] = "alukikulni";
+    char word[] = "dog goat mmmmm duck doodle never";
 
-    int a = 5;
-    for (int i = 0; i <= strlen(word)-a; i++){
-        int check = 0;
-        for (int z = 0; z < a\2 ;z++) {
-            for(int j = i; j < i+a/2; j++) {
-                        printf("----i =%d  j = %d /%d", i, j, a + i - 1-f);
-                        printf("%c", word[j]);
-                        printf("%c", word[a + i - 1-f]);
-                        printf("\n");
-                        if(word[j] == word[a + i - 1-f]) {
-                            check++;
-                        }
+    for (int a = 3; a < strlen(word); a++) {
+        for (int i = 0; i <= strlen(word)-a; i++) {
+            int check = 0;
+            for(int j = i; j < i+a/2; j++){
+                if(word[j] == word[2 * i + a - 1- j]){
+                    check++;
+                }
+            }
+            if(check == a/2) {
+                for (int k = i; k < i+a; k++){
+                    printf("%c", word[k]);
+                }
+                printf(" ");
             }
         }
-        printf("\n");
-        if(check == a/2){
-                    for (int k = i; k < i+a; k++){
-                        printf("%c", word[k]);
-                    }
-                    printf("\n");
-
-        }
-
     }
 }
