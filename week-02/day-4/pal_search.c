@@ -5,7 +5,7 @@
 
 void main()
 {
-    char word[] = "dog goat mmmmm duck doodle never";
+    char word[] = "dog goat duck doodle never";
 
     for (int a = 3; a < strlen(word); a++) {
         for (int i = 0; i <= strlen(word)-a; i++) {
