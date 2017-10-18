@@ -21,7 +21,7 @@ int modulo(int mod1, int mod2 )
     return mod1 % mod2;
 
 }
-int power(float pow1, float pow2 )
+int power(int pow1, int pow2 )
 {
     return pow(pow1, pow2);
 }
@@ -36,5 +36,19 @@ float logarithm(float log1, float log2 )
 int binto(char *binto1, int binto2)
 {
         return strtol(binto1, NULL, 2);
-
+}
+int hexto(char *hex1, int hex2)
+{
+        return strtol(hex1, NULL, 16);
+}
+int dectobin(int dec)
+{
+    if (dec == 0)
+    {
+        return 0;
+    }
+    else
+    {
+        return (dec % 2 + 10 * dectobin(dec / 2));
+    }
 }

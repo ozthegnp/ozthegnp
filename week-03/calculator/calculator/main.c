@@ -7,6 +7,7 @@ void help();
 
 void set_cursor_pos(int x, int y);
 void clrscr();
+int i = 1;
 
 int main()
 {
@@ -20,41 +21,69 @@ int main()
 
     while(strcmp(command, "exit") != 0) {
 
-        printf("Enter your calculation: ");
+       // printf("Enter your calculation: ");
         gets(command);
 
-        strx = strtok(command, " ");
-        function = strtok(NULL, " ");
-        stry = strtok(NULL, " ");
-        x = strtol(strx, NULL, 10);
-        y = strtol(stry, NULL, 10);
+        if(strcmp(command, "clear") == 0){
+            clrscr();
+            i = 1;
+        }else {
 
-        if(strcmp(function, "+") == 0){
-            printf("= %.2f\n", addition(x, y));
-        } else if(strcmp(function, "-") == 0){
-            printf("= %.2f\n", subtraction(x, y));
-        } else if(strcmp(function, "*") == 0){
-            printf("= %.2f\n", multiplication(x, y));
-        } else if(strcmp(function, "/") == 0){
-            printf("= %.2f\n", division(x, y));
-        } else if(strcmp(function, "%") == 0){
-            printf("= %d\n", modulo(x, y));
-        } else if(strcmp(function, "^") == 0){
-            printf("= %.2f\n", power(x, y));
-        } else if(strcmp(function, "<") == 0){
-            printf("~= %d\n", root(x, y));
-        } else if(strcmp(function, "log") == 0){
-            printf("= %.1f\n", logarithm(x, y));
-        } else if(strcmp(function, "binto") == 0){
-                if(y == 10)
-                    printf("= %d\n", binto(strx, y));
-                else if (y == 16)
-                    printf("= %x\n", binto(strx, y));
-                else
-                  printf("!!!Invalid number, please type '10' or '16' after 'binto'!!!\neg. 1001 binto 10 = 9\n");
 
-        } else if(strcmp(function, "hexto") == 0){
-            printf("= %.1f\n", logarithm(x, y));
+            strx = strtok(command, " ");
+            function = strtok(NULL, " ");
+            stry = strtok(NULL, " ");
+            x = strtol(strx, NULL, 10);
+            y = strtol(stry, NULL, 10);
+
+
+            //set_cursor_pos(strlen(command) + 6, i);
+
+
+            if(strcmp(function, "+") == 0){
+                printf("= %.2f\n", addition(x, y));
+            } else if(strcmp(function, "-") == 0){
+                printf("= %.2f\n", subtraction(x, y));
+            } else if(strcmp(function, "*") == 0){
+                printf("= %.2f\n", multiplication(x, y));
+            } else if(strcmp(function, "/") == 0){
+                printf("= %.2f\n", division(x, y));
+            } else if(strcmp(function, "%") == 0){
+                printf("= %d\n", modulo(x, y));
+            } else if(strcmp(function, "^") == 0){
+                printf("= %d\n", power(x, y));
+            } else if(strcmp(function, "<") == 0){
+                printf("~= %d\n", root(x, y));
+            } else if(strcmp(function, "log") == 0){
+                printf("= %.1f\n", logarithm(x, y));
+            } else if(strcmp(function, "binto") == 0){
+                    if(y == 10)
+                        printf("= %d\n", binto(strx, y));
+                    else if (y == 16)
+                        printf("= %x\n", binto(strx, y));
+                    else
+                      printf("Invalid number. Start with a binary number and type '10' or '16' after 'binto'.\n");
+
+            } else if(strcmp(function, "hexto") == 0){
+                    if(y == 10)
+                        printf("= %d\n", hexto(strx, y));
+                    else if (y == 2)
+                        printf("= %d\n", dectobin(hexto(strx, y)));
+                    else
+                      printf("Invalid number. Start with a hexadecimal number and type '2' or '10' after 'hexto'.\n");
+
+            }else if(strcmp(function, "decto") == 0){
+                    if(y == 2)
+                        printf("= %d\n", dectobin(x));
+                    else if (y == 16)
+                        printf("= %x\n", x);
+                    else
+                      printf("Invalid number. Start with a decimal number and type '2' or '16' after 'decto'.");
+
+            }else
+            printf("Invalid command!!");
+
+            i++;
         }
     }
 
