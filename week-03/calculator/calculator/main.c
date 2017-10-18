@@ -2,9 +2,16 @@
 #include <stdio.h>
 
 void help();
-float addition(float a, float b);
+float addition(float add1, float add2);
+float subtraction(float sub1, float sub2 );
+float multiplication(float mul1, float mul2 );
+float division(float div1, float div2 );
+int modulo(int mod1, int mod2 );
+
+
 void set_cursor_pos(int x, int y);
 void clrscr();
+
 
 
 int main()
@@ -12,22 +19,35 @@ int main()
     help();
 
     char command[256];
-    char x = '0', y = '0';
-    char *token;
+    char *strx;
+    char *stry;
+    char *function;
+    long x, y;
+
+    while(strcmp(command, "exit") != 0) {
+
+        printf("Enter your calculation: ");
+        gets(command);
+
+        strx = strtok(command, " ");
+        function = strtok(NULL, " ");
+        stry = strtok(NULL, " ");
+        x = strtol(strx, NULL, 10);
+        y = strtol(stry, NULL, 10);
 
 
-    printf("Enter your calculation: ");
-    gets(command);
-
-        token = strtok(command, " ");
-
-            while(token != NULL){
-                int i = token;
-                printf("%s\n", token);
-                token = strtok(NULL, " ");
-               // set_cursor_pos(0,0);
-            }
-
+        if(strcmp(function, "+") == 0){
+            printf("= %.2f\n", addition(x,y));
+        }else if(strcmp(function, "-") == 0){
+            printf("= %.2f\n", subtraction(x,y));
+        } else if(strcmp(function, "*") == 0){
+            printf("= %.2f\n", multiplication(x,y));
+        }else if(strcmp(function, "/") == 0){
+            printf("= %.2f\n", division(x,y));
+        }else if(strcmp(function, "%") == 0){
+            printf("= %.2f\n", modulo(x,y));
+        }
+    }
 
 }
 
@@ -59,10 +79,29 @@ void help()
     getchar();
     clrscr();
 }
-float addition(float a, float b)
+float addition(float add1, float add2)
 {
-    return a + b;
+    return add1 + add2;
 }
+float subtraction(float sub1, float sub2 )
+{
+    return sub1 - sub2;
+}
+float multiplication(float mul1, float mul2 )
+{
+    return mul1 * mul2;
+}
+float division(float div1, float div2 )
+{
+    return div1 / div2;
+
+}
+int modulo(int mod1, int mod2 )
+{
+    return mod1 % mod2;
+
+}
+
 void set_cursor_pos(int x, int y)
 {
 	printf("\033[%d;%dH", y+1, x+1);
