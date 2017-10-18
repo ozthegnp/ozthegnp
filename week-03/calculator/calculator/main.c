@@ -1,18 +1,12 @@
 #include <stdio.h>
 #include <stdio.h>
+#include <math.h>
+#include "functions.h"
 
 void help();
-float addition(float add1, float add2);
-float subtraction(float sub1, float sub2 );
-float multiplication(float mul1, float mul2 );
-float division(float div1, float div2 );
-int modulo(int mod1, int mod2 );
-
 
 void set_cursor_pos(int x, int y);
 void clrscr();
-
-
 
 int main()
 {
@@ -35,17 +29,32 @@ int main()
         x = strtol(strx, NULL, 10);
         y = strtol(stry, NULL, 10);
 
-
         if(strcmp(function, "+") == 0){
-            printf("= %.2f\n", addition(x,y));
-        }else if(strcmp(function, "-") == 0){
-            printf("= %.2f\n", subtraction(x,y));
+            printf("= %.2f\n", addition(x, y));
+        } else if(strcmp(function, "-") == 0){
+            printf("= %.2f\n", subtraction(x, y));
         } else if(strcmp(function, "*") == 0){
-            printf("= %.2f\n", multiplication(x,y));
-        }else if(strcmp(function, "/") == 0){
-            printf("= %.2f\n", division(x,y));
-        }else if(strcmp(function, "%") == 0){
-            printf("= %.2f\n", modulo(x,y));
+            printf("= %.2f\n", multiplication(x, y));
+        } else if(strcmp(function, "/") == 0){
+            printf("= %.2f\n", division(x, y));
+        } else if(strcmp(function, "%") == 0){
+            printf("= %d\n", modulo(x, y));
+        } else if(strcmp(function, "^") == 0){
+            printf("= %.2f\n", power(x, y));
+        } else if(strcmp(function, "<") == 0){
+            printf("~= %d\n", root(x, y));
+        } else if(strcmp(function, "log") == 0){
+            printf("= %.1f\n", logarithm(x, y));
+        } else if(strcmp(function, "binto") == 0){
+                if(y == 10)
+                    printf("= %d\n", binto(strx, y));
+                else if (y == 16)
+                    printf("= %x\n", binto(strx, y));
+                else
+                  printf("!!!Invalid number, please type '10' or '16' after 'binto'!!!\neg. 1001 binto 10 = 9\n");
+
+        } else if(strcmp(function, "hexto") == 0){
+            printf("= %.1f\n", logarithm(x, y));
         }
     }
 
@@ -63,7 +72,7 @@ void help()
     printf(" *	multiplication\n");
     printf(" /	division\n");
     printf(" %	division with remainder\n");
-    printf(" ^	squaring\n");
+    printf(" ^	power\n");
     printf(" <	square root\n");
     printf(" log	logarithm\n");
     printf(" binto	binary to hex or dec\n");
@@ -78,28 +87,6 @@ void help()
     printf(" ====================================\n");
     getchar();
     clrscr();
-}
-float addition(float add1, float add2)
-{
-    return add1 + add2;
-}
-float subtraction(float sub1, float sub2 )
-{
-    return sub1 - sub2;
-}
-float multiplication(float mul1, float mul2 )
-{
-    return mul1 * mul2;
-}
-float division(float div1, float div2 )
-{
-    return div1 / div2;
-
-}
-int modulo(int mod1, int mod2 )
-{
-    return mod1 % mod2;
-
 }
 
 void set_cursor_pos(int x, int y)
