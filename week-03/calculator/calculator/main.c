@@ -8,19 +8,21 @@ void help();
 void set_cursor_pos(int x, int y);
 void clrscr();
 int space_counter(char word[]);
+int isitdigit(char *str);
+void errormsg();
+
+char command[256];
+char *strx;
+char *stry;
+char *function;
+long x, y;
 int line_count = 1;
 
 int main()
 {
     help();
 
-    char command[256];
-    char *strx;
-    char *stry;
-    char *function;
-    long x, y;
-
-    while(1) {
+    while(line_count >= 0) {
 
         printf("Enter your command: ");
         gets(command);
@@ -35,63 +37,68 @@ int main()
         }else if(strcmp(command, "help") == 0){
             help();
         }else if (space_count == 2){
-                    set_cursor_pos(strlen(command) + 21, line_count);
-                    strx = strtok(command, " ");
-                    function = strtok(NULL, " ");
-                    stry = strtok(NULL, " ");
-                    x = strtol(strx, NULL, 10);
-                    y = strtol(stry, NULL, 10);
 
-                    if(strcmp(function, "+") == 0){
-                        printf("= %.2f\n", addition(x, y));
-                    } else if(strcmp(function, "-") == 0){
-                        printf("= %.2f\n", subtraction(x, y));
-                    } else if(strcmp(function, "*") == 0){
-                        printf("= %.2f\n", multiplication(x, y));
-                    } else if(strcmp(function, "/") == 0){
-                        printf("= %.2f\n", division(x, y));
-                            if(y == 0){
-                                printf(" Oh-oh! you divided by zero! Don't do that.\n");
-                                 line_count++;
-                            }
-                    } else if(strcmp(function, "%") == 0){
-                        printf("= %d\n", modulo(x, y));
-                    } else if(strcmp(function, "^") == 0){
-                        printf("= %d\n", power(x, y));
-                    } else if(strcmp(function, "<") == 0){
-                        printf("~= %d\n", root(x, y));
-                    } else if(strcmp(function, "log") == 0){
-                        printf("= %.1f\n", logarithm(x, y));
-                    } else if(strcmp(function, "binto") == 0){
-                            if(y == 10)
-                                printf("= %d\n", binto(strx, y));
-                            else if (y == 16)
-                                printf("= %x\n", binto(strx, y));
-                            else
-                              printf("Invalid number. Start with a binary number and type '10' or '16' after 'binto'.\n");
+            set_cursor_pos(strlen(command) + 21, line_count);
 
-                    } else if(strcmp(function, "hexto") == 0){
-                            if(y == 10)
-                                printf("= %d\n", hexto(strx, y));
-                            else if (y == 2)
-                                printf("= %d\n", dectobin(hexto(strx, y)));
-                            else
-                              printf("Invalid number. Start with a hexadecimal number and type '2' or '10' after 'hexto'.\n");
+            strx = strtok(command, " ");
+            function = strtok(NULL, " ");
+            stry = strtok(NULL, " ");
+            x = strtol(strx, NULL, 10);
+            y = strtol(stry, NULL, 10);
 
-                    }else if(strcmp(function, "decto") == 0){
-                            if(y == 2)
-                                printf("= %d\n", dectobin(x));
-                            else if (y == 16)
-                                printf("= %x\n", x);
-                            else
-                              printf("Invalid number. Start with a decimal number and type '2' or '16' after 'decto'.");
+                    if(isitdigit(stry) == 1 && strcmp(function, "hexto") == 0) {
+                                    if(y == 10)
+                                        printf("= %d\n", hexto(strx, y));
+                                    else if (y == 2)
+                                        printf("= %d\n", dectobin(hexto(strx, y)));
+                                    else
+                                      printf("Error. Type '2' or '10' after 'hexto'.\n");
+                    } else if(isitdigit(stry) == 1 && isitdigit(strx) == 1) {
+                            if(strcmp(function, "+") == 0){
+                                printf("= %.2f\n", addition(x, y));
+                            } else if(strcmp(function, "-") == 0){
+                                printf("= %.2f\n", subtraction(x, y));
+                            } else if(strcmp(function, "*") == 0){
+                                printf("= %.2f\n", multiplication(x, y));
+                            } else if(strcmp(function, "/") == 0){
+                                printf("= %.2f\n", division(x, y));
+                                    if(y == 0){
+                                        printf(" Oh-oh! you divided by zero! Don't do that.\n");
+                                         line_count++;
+                                    }
+                            } else if(strcmp(function, "%") == 0){
+                                printf("= %d\n", modulo(x, y));
+                            } else if(strcmp(function, "^") == 0){
+                                printf("= %d\n", power(x, y));
+                            } else if(strcmp(function, "<") == 0){
+                                printf("~= %d\n", root(x, y));
+                            } else if(strcmp(function, "log") == 0){
+                                printf("= %.1f\n", logarithm(x, y));
+                            } else if(strcmp(function, "binto") == 0){
+                                    if(y == 10)
+                                        printf("= %d\n", binto(strx, y));
+                                    else if (y == 16)
+                                        printf("= %x\n", binto(strx, y));
+                                    else
+                                      printf("Error. Type '10' or '16' after 'binto'.\n");
 
-                    }else
-                    printf("Invalid command!!");
+                            } else if(strcmp(function, "decto") == 0){
+                                    if(y == 2)
+                                        printf("= %d\n", dectobin(x));
+                                    else if (y == 16)
+                                        printf("= %x\n", x);
+                                    else
+                                      printf("Error. Type '2' or '16' after 'decto'.");
 
-                    line_count++;
+                            } else
+                                errormsg();
+
+                        } else
+                            errormsg();
+
+            line_count++;
             } else{
-            printf("Invalid command. Type 'help' if you're confused about this awesome calculator.\n");
+                errormsg();
             line_count += 2;
             }
     }
@@ -144,4 +151,19 @@ int space_counter(char word[])
     }
     return counter;
 }
+int isitdigit(char *str)
+{
+    for (int i=0;i<strlen(str); i++) {
+        if (!isdigit(str[i]))
+        {
+            return 0;
+            break;
+        } else
+        return 1;
+    }
+}
+void errormsg()
+{
+    printf("Error. Type 'help' if confused.\n");
 
+}
