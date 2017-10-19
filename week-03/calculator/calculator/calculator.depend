@@ -1,9 +1,9 @@
 # depslib dependency file v1.0
-1508406329 source:/Users/Oz/greenfox/ozthegnp/week-03/calculator/calculator/main.c
+1508426764 source:/Users/Oz/greenfox/ozthegnp/week-03/calculator/calculator/main.c
 	<stdio.h>
 	<stdio.h>
 	<math.h>
 	"functions.h"
 
-1508333771 /Users/Oz/greenfox/ozthegnp/week-03/calculator/calculator/functions.h
+1508424135 /Users/Oz/greenfox/ozthegnp/week-03/calculator/calculator/functions.h
 
