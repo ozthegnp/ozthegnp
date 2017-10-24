@@ -59,3 +59,58 @@ long long int dectobin(long long int dec)
         return (dec % 2 + 10 * dectobin(dec / 2));
     }
 }
+int space_counter(char word[])
+{
+    int counter = 0;
+    for(int i = 0; i < strlen(word);i++){
+        if(word[i] == ' ')
+            counter++;
+    }
+    return counter;
+}
+int isitdigit(char str[])
+{
+    int result = 1;
+
+    for (int i=0;i<strlen(str); i++) {
+        if (str[i] < 45 || str[i] > 57 || str[i] == 47){
+            return result = 0;
+            break;
+        }
+    }
+
+    return result;
+}
+void errormsg()
+{
+    printf("Error. Type 'help' if confused.\n");
+
+}
+int bincheck(char num[])
+{
+    int bin_count = 0;
+    for (int i = 0; i < strlen(num); i++){
+
+        if(num[i] == '0'|| num[i] == '1'){
+            bin_count++;
+        }
+    }
+    return strlen(num)-bin_count;
+
+}
+int isithex(char str[])
+{
+    int result = 1;
+
+    for (int i=0;i<strlen(str); i++) {
+        if (str[i] < 45 || str[i] > 57 || str[i] == 47){
+            result = 0;
+        }
+    }
+    return result;
+}
+
+void set_cursor_pos(int x, int y)
+{
+	printf("\033[%d;%dH", y+1, x+1);
+}

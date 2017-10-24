@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="8" zoom_2="0">
+	<File name="main.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4804" topLine="100" />
+			<Cursor1 position="286" topLine="26" />
 		</Cursor>
 	</File>
 	<File name="functions.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="7" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="366" topLine="0" />
+			<Cursor1 position="1664" topLine="0" />
 		</Cursor>
-		<Folding>
-			<Collapse line="2" />
-			<Collapse line="6" />
-			<Collapse line="10" />
-			<Collapse line="14" />
-			<Collapse line="19" />
-			<Collapse line="28" />
-			<Collapse line="32" />
-			<Collapse line="36" />
-			<Collapse line="40" />
-			<Collapse line="44" />
-		</Folding>
+	</File>
+	<File name="calculator.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="17" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="78" topLine="0" />
+		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
