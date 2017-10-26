@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1509031134 source:/Users/Oz/greenfox/ozthegnp/week-04/day-3/todo_app_codeblox/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"todo.h"
+
+1509030776 /Users/Oz/greenfox/ozthegnp/week-04/day-3/todo_app_codeblox/todo.h
+
+1509031440 source:/Users/Oz/greenfox/ozthegnp/week-04/day-3/todo_app_codeblox/todo.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"todo.h"
+
