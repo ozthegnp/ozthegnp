@@ -17,7 +17,7 @@ void main()
 {
     char arr0[] = "The";
     char arr1[] = "quick";
-    char arr2[] = "green";
+    char arr2[] = "brown";
     char arr3[] = "dog";
     char arr4[] = "jumps";
     char arr5[] = "over";
@@ -42,6 +42,7 @@ void main()
         printf("%s\n", ptr[i]);
     }
 
+    strcpy(arr2,"green");
     ptr[3] = arr8;
     ptr[8] = arr3;
 
