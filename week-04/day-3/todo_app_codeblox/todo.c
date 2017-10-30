@@ -42,7 +42,7 @@ void create_file(char* file_path, int size, task_s task[]) {
         return;
     }
     for(int i = 0; i < size;i++){
-    fprintf(fh, "%d %s\n", i+1, task[i].name);
+    fprintf(fh, "%s ", task[i].name);
     }
 
     fclose(fh);
