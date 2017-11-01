@@ -36,12 +36,12 @@ void main()
     for(int i = 0; i < 8; i++){
         for(int j = 0; j < 8; j++){
             if(i % 5 == 1)
-                arry[i][j] = 'A';// PAWNS
+                arry[i][j] = 'P';// PAWNS
             else if(i % 7 == 0) {
                 if(j % 7 == 0)
                     arry[i][j] = 'R';//ROOKS
                 else if(j % 5 == 1)
-                    arry[i][j] = 'K';//KNIGHT
+                    arry[i][j] = 'L';//KNIGHT(LÓ)
                 else if(j % 3 == 2)
                     arry[i][j] = 'B';//BISHOP
                 else if(j == 3)
@@ -57,7 +57,7 @@ void main()
 
     //KNIGHT MOVEMENT FROM 8B to 6C
     printf("KNIGHT MOVEMENT FROM 8B to 6C\n");
-    arry[5][2] = 'K';
+    arry[5][2] = 'L';
     arry[7][1] = 'X';
     for(int i = 0; i < 8; i++){
         for(int j = 0; j < 8; j++){
