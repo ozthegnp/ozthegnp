@@ -11,15 +11,12 @@
 
 void printer(int *ptr, int size, int jump);//jump indicates how many should it jump
 
-
 int main()
 {
     srand ( time(NULL) );
     int numbers[16];
     int *ptr = numbers;
     int size = sizeof(numbers)/sizeof(numbers[0]);
-
-    printf("array\taddress\t\tvalue\n");
 
     for(int i = 0; i < size; i++){
         *(ptr+ i) = rand() % 100;
@@ -34,8 +31,10 @@ int main()
 }
 void printer(int *ptr, int size, int jump)
 {
+    printf("array\taddress\t\tvalue\n");
     printf("-------------------------\n");
-    for(int i = 0; i < size/jump; i++){
-        printf("%d\t\t%x\t%d\n", i, ptr + jump * i, *(ptr + jump * i));
+    for(int i = 0; i < size; i += jump){
+        printf("%d\t\t%x\t%d\n", i, ptr + i, *(ptr + i));
     }
+    printf("\n");
 }
