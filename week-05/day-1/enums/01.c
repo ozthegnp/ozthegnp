@@ -20,7 +20,7 @@ int cursor[2] = {4,5};
 void board();
 void chessboard();
 void board_status();
-void move();
+void move(int i, int j);
 char ch;
 
 

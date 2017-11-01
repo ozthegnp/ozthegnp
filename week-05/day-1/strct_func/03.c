@@ -1,17 +1,11 @@
 /*
- * Create a structure to represent a list of numbers. The structure should know how many nuber it has stored.
- * Store the numbers in an array.
- * Create functions to:
- *    * Add a new number at the end.
- *    * Get a number at a given index.
- *    * Replace a number at a given index if it exists.
+ * Take the previous exercise and add a function which sorts the elements in an ascending order.
  *
- * If the array is too smal, create a new one, copy everything into it, add the new element and delete the old array.
- *
- * Test in the main function whether everything works.
+ * Test it in the main function and print the results.
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct{
     int number;
@@ -21,6 +15,11 @@ void number_printer(number_s number[], int size);
 void number_adder(number_s number[], int *size);
 void index_printer(number_s number[]);
 void index_change(number_s number[]);
+void sorter(number_s number[], int size);
+
+
+
+
 
 void main()
 {
@@ -41,6 +40,8 @@ void main()
             index_printer(numbers);
         else if(strcmp(cmd, "ch") == 0)
             index_change(numbers);
+        else if(strcmp(cmd, "so") == 0)
+            sorter(numbers, size);
         else
             printf("invalid:\n");
 
@@ -82,4 +83,21 @@ void index_change(number_s number[])
     scanf("%d", &number[idx].number);
     getchar();
     printf("[%d] is now %d\n", idx, number[idx].number );
+}
+void sorter(number_s number[], int size)
+{
+    int temp = 0;
+    int flag = 2;
+    while(flag > 0){
+        flag = 0;
+        for(int i = 0; i < size - 1; i++){
+            if(number[i].number > number[i+1].number){
+                temp = number[i].number;
+                number[i].number = number[i + 1].number;
+                number[i + 1].number = temp;
+                flag++;
+            }
+        }
+
+    }
 }
