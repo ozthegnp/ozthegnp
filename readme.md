@@ -6,3 +6,8 @@
 
 Have a great day!
 ![alt text](oscar.jpg)
+
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
