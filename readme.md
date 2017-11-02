@@ -5,11 +5,12 @@
 
 | :white_check_mark: **Week 1** |||||
 | ---- |---- |----- |----- |----- |
-| Day 1 |Arrays|
-| Day 2 |Arrays|
-| Day 3 |Arrays|
-| Day 4 |Arrays|
-| Day 5 |Arrays|
+| :sun_with_face: Day 1 |Arrays|
+| :sun_with_face: Day 1 |Arrays|
+| :sun_with_face: Day 1 |Arrays|
+| :sun_with_face: Day 1 |Arrays|
+| :sun_with_face: Day 1 |Arrays|
+
 
 
 
