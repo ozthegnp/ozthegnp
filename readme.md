@@ -1,13 +1,17 @@
 ![alt text](oscar.jpg)
-### Welcome to Oscar's Repository
+# Welcome to My Repository
 
-[Patchwork](https://github.com/ozthegnp/patchwork.git)
 
-[git-lesson-repository](https://github.com/ozthegnp/git-lesson-repository.git)
 
-- ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `#f03c15`
+| :heavy_check_mark: <font color=#57a71c>**Week 1**</font> |||||
+| ---- |---- |----- |----- |----- |
+| <font color=#57a71c>Day 1:</font |Arrays|
+| <font color=#57a71c>Day 1:</font |Arrays|
+| <font color=#57a71c>Day 1:</font |Arrays|
+| <font color=#57a71c>Day 1:</font |Arrays|
+| <font color=#57a71c>Day 1:</font |Arrays|
 
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+
+
+
+
