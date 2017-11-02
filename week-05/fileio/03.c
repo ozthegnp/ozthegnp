@@ -8,9 +8,9 @@
 #include <stdio.h>
 #include <string.h>
 
-typedef struct{
-    char verse_arr[50][256];
-    int lines_in_verse;
+typedef struct{ //Creates a struct for each verse
+    char verse_arr[50][256];//matrix for each line
+    int lines_in_verse;//counts total lines of verse
 }verse_s;
 
 void read_file_fgets(char* file_path, char* new_file_path) ;
@@ -19,7 +19,6 @@ int main()
 {
     char file_name[] = "poem.txt";
     char new_file_name[] = "new_poem.txt";
-
 
     read_file_fgets(file_name, new_file_name);
 
@@ -44,9 +43,9 @@ void read_file_fgets(char* file_path, char* new_file_path) {
 
     while(!feof(fh)){
         fgets(line, 256, fh);
-        strcpy(verse[verse_count].verse_arr[line_count], line);
+        strcpy(verse[verse_count].verse_arr[line_count], line);//puts each line in the struct matrix
         line_count++;
-        verse[verse_count].lines_in_verse = line_count - 1;
+        verse[verse_count].lines_in_verse = line_count - 1;//keeps track of total lines verse
 
         if(strcmp(line, "\n") == 0){
             verse_count++;
@@ -54,7 +53,7 @@ void read_file_fgets(char* file_path, char* new_file_path) {
         }
     }
 
-    for(int i = verse_count; i > -1; i--){
+    for(int i = verse_count; i > -1; i--){ //reverses verses order
         for(int j = 0; j < verse[i].lines_in_verse; j++){
             fputs(verse[i].verse_arr[j], nfh);
         }
