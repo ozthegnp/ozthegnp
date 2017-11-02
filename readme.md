@@ -13,11 +13,11 @@
 
 | :white_check_mark: **Week 3** | |:white_check_mark: **Week 4**||
 | ---- |---- |----- |----- |
-| :sun_with_face: Day 1: |Speech training, Debugging | :sun_with_face: Day 1: |Team building|
-| :sun_with_face: Day 2: |Typecasting|:sun_with_face: Day 2: |Team building|
-| :sun_with_face: Day 3: |Practicing|:sun_with_face: Day 3: |Team building|
-| :sun_with_face: Day 4: |CLI Calculator|:sun_with_face: Day 4: |Team building|
-| :sun_with_face: Day 5: |CLI Calculator|:sun_with_face: Day 5: |Team building|
+| :sun_with_face: Day 1: |Speech training, Debugging | :palm_tree: Day 1: |Memorial Day|
+| :sun_with_face: Day 2: |Typecasting|:sun_with_face: Day 2: |Pointer|
+| :sun_with_face: Day 3: |Practicing|:sun_with_face: Day 3: |Structure, Union|
+| :sun_with_face: Day 4: |CLI Calculator|:sun_with_face: Day 4: |Todo App|
+| :sun_with_face: Day 5: |CLI Calculator|:sun_with_face: Day 5: |Todo App|
 
 
 
