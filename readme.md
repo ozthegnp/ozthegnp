@@ -3,7 +3,7 @@
 
 
 
-| :heavy_check_mark: <font color=#57a71c>**Week 1**</font> |||||
+| :white_check_mark: **Week 1** |||||
 | ---- |---- |----- |----- |----- |
 | Day 1 |Arrays|
 | Day 2 |Arrays|
