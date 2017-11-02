@@ -48,8 +48,6 @@ void main()
             sort(numbers, size);
         else
             printf("invalid:\n");
-
-
     }
 }
 
@@ -77,6 +75,7 @@ void index_printer(number_s number[])
     getchar();
     printf("[%d] - %d\n", idx, number[idx].number );
 }
+
 void index_change(number_s number[])
 {
     int idx = 0;
@@ -88,6 +87,7 @@ void index_change(number_s number[])
     getchar();
     printf("[%d] is now %d\n", idx, number[idx].number );
 }
+
 void sorter_asc(number_s number[], int size)
 {
     int temp = 0;
@@ -104,6 +104,7 @@ void sorter_asc(number_s number[], int size)
         }
     }
 }
+
 void sorter_dsc(number_s number[], int size)
 {
     int temp = 0;
@@ -120,6 +121,7 @@ void sorter_dsc(number_s number[], int size)
         }
     }
 }
+
 void sort(number_s number[], int size)
 {
     int idx = 0;
@@ -132,6 +134,4 @@ void sort(number_s number[], int size)
         sorter_dsc(number, size);
     else
         printf("suck it, bad number\n");
-
-
 }
