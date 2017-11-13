@@ -19,7 +19,9 @@ int main() {
 
     cout << "I'm " <<*name << ", " << *age << " years old. I can eat "<< *pizza_capacity << " slices of pizza."<< endl;
 
-    delete name, age, pizza_capacity;
+    delete name;
+    delete age;
+    delete pizza_capacity;
 
     return 0;
 }
