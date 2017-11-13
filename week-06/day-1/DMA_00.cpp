@@ -17,7 +17,7 @@ int main() {
     age = new int(27);
     pizza_capacity = new int(8);
 
-    cout << "I'm " <<*name << ", " << *age << " years old. I can eat "<< *pizza_capacity << " slices of pizza."<< endl;
+    cout << "I'm " << *name << ", " << *age << " years old. I can eat "<< *pizza_capacity << " slices of pizza."<< endl;
 
     delete name;
     delete age;
