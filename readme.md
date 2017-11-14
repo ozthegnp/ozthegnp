@@ -18,3 +18,11 @@
 | :sun_with_face: Day 3: |Practicing|:sun_with_face: Day 3: |Structure, Union|
 | :sun_with_face: Day 4: |CLI Calculator|:sun_with_face: Day 4: |Todo App|
 | :sun_with_face: Day 5: |CLI Calculator|:sun_with_face: Day 5: |Todo App|
+
+| :white_check_mark: **Week 5** | |:white_check_mark: **Week 6**||
+| ---- |---- |----- |----- |
+| :sun_with_face: Day 1: |Stress training, Practice | :palm_tree: Day 1: |C++, Introduction|
+| :sun_with_face: Day 2: |Practice day|:sun_with_face: Day 2: |C++, OOP|
+| :sun_with_face: Day 3: |National Holiday|:sun_with_face: Day 3: |C++, OOP|
+| :sun_with_face: Day 4: |Practice day|:sun_with_face: Day 4: |C++ CLI Calculator|
+| :sun_with_face: Day 5: |1st Exam|:sun_with_face: Day 5: |C++ CLI Calculator|
