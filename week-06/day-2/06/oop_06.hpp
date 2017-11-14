@@ -1,3 +1,14 @@
+//
+//  oop_06.hpp
+//  cpp_playground
+//
+//  Created by Oz on 11/14/17.
+//  Copyright © 2017 Oscar Inc. All rights reserved.
+//
+
+#ifndef oop_06_hpp
+#define oop_06_hpp
+
 #include <iostream>
 #include <string>
 
@@ -7,25 +18,8 @@ class Car{
     string type;
     int odometer;
 public:
-    Car(string type, int odometer){
-        this->type = type;
-        this->odometer = odometer;
-    }
-    int run(int add_km){
-        odometer += add_km;
-        return odometer;
-    }
+    Car(string type, int odometer);
+    int run(int add_km);
 };
 
-int main() {
-    // Create a class called "Car"
-    // It should have a "type" property that stores the car's type in a string eg: "Mazda"
-    // It should have a "km" property that stores how many kilometers it have run
-    // The km and the type property should be a parmeter in the constructor
-    // It should have a method called "run" that takes a number and increments the "km" property by it
-    Car ca("Mazda", 12345);
-
-    cout << "New odometer stat: " << ca.run(655) << endl;
-
-    return 0;
-}
+#endif /* oop_06_hpp */
