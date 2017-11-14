@@ -23,6 +23,6 @@
 | ---- |---- |----- |----- |
 | :sun_with_face: Day 1: |Stress training, Practice | :palm_tree: Day 1: |C++, Introduction|
 | :sun_with_face: Day 2: |Practice day|:sun_with_face: Day 2: |C++, OOP|
-| :sun_with_face: Day 3: |National Holiday|:sun_with_face: Day 3: |C++, OOP|
+| :palm_tree: Day 3: |National Holiday|:sun_with_face: Day 3: |C++, OOP|
 | :sun_with_face: Day 4: |Practice day|:sun_with_face: Day 4: |C++ CLI Calculator|
 | :sun_with_face: Day 5: |1st Exam|:sun_with_face: Day 5: |C++ CLI Calculator|
