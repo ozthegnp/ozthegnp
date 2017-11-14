@@ -13,7 +13,7 @@
 
 | :white_check_mark: **Week 3** | |:white_check_mark: **Week 4**||
 | ---- |---- |----- |----- |
-| :sun_with_face: Day 1: |Speech training, Debugging | :palm_tree: Day 1: |Memorial Day|
+| :wrench: Day 1: |Speech training, Debugging  | :palm_tree: Day 1: |Memorial Day|
 | :sun_with_face: Day 2: |Typecasting|:sun_with_face: Day 2: |Pointer|
 | :sun_with_face: Day 3: |Practicing|:sun_with_face: Day 3: |Structure, Union|
 | :sun_with_face: Day 4: |CLI Calculator|:sun_with_face: Day 4: |Todo App|
@@ -21,7 +21,7 @@
 
 | :white_check_mark: **Week 5** | |:white_check_mark: **Week 6**||
 | ---- |---- |----- |----- |
-| :sun_with_face: Day 1: |Stress training, Practice | :palm_tree: Day 1: |C++, Introduction|
+| :wrench: Day 1: |Stress training, Practice   | :palm_tree: Day 1: |C++, Introduction|
 | :sun_with_face: Day 2: |Practice day|:sun_with_face: Day 2: |C++, OOP|
 | :palm_tree: Day 3: |National Holiday|:sun_with_face: Day 3: |C++, OOP|
 | :sun_with_face: Day 4: |Practice day|:sun_with_face: Day 4: |C++ CLI Calculator|
