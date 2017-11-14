@@ -1,3 +1,14 @@
+//
+//  opp_03.hpp
+//  cpp_playground
+//
+//  Created by Oz on 11/14/17.
+//  Copyright © 2017 Oscar Inc. All rights reserved.
+//
+
+#ifndef opp_03_hpp
+#define opp_03_hpp
+
 #include <iostream>
 #include <string>
 
@@ -7,23 +18,8 @@ class Student {
 public:
     string name;
     unsigned int age;
-    Student(string name, unsigned int age) {
-        this->age = age;
-        this->name = name;
-    }
-    void greet(){
-        cout << "Hello, my name is " << name << endl;
-    }
-
+    Student(string name, unsigned int age);
+    void greet();
 };
 
-int main() {
-    // Create a method on the Student class called "greet" that returns a string
-    // like: "Hello my name is: <student name>"
-
-    Student ss("Oscar", 21);
-
-    ss.greet();
-
-    return 0;
-}
+#endif /* opp_03_hpp */
