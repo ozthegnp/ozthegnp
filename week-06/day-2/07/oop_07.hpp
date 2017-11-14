@@ -1,3 +1,14 @@
+//
+//  oop_07.hpp
+//  cpp_playground
+//
+//  Created by Oz on 11/14/17.
+//  Copyright © 2017 Oscar Inc. All rights reserved.
+//
+
+#ifndef oop_07_hpp
+#define oop_07_hpp
+
 #include <iostream>
 #include <string>
 
@@ -7,33 +18,8 @@ class Pirate{
     int rum_counter = 0;
 
 public:
-    void drink_rum(){
-        rum_counter++;
-    }
-    void hows_goin_mate(){
-        if(rum_counter >= 5)
-            cout << "Arrrr!" << endl;
-        else
-            cout << "Nothin'" << endl;
-    }
+    void drink_rum();
+    void hows_goin_mate();
 };
 
-int main() {
-    // create a pirate class
-    // it should have 2 methods
-    // drink_rum()
-    // hows_goin_mate()
-    // if the drink_rum was called at least 5 times:
-    // hows_goin_mate should return "Arrrr!"
-    // "Nothin'" otherwise
-
-    Pirate pi;
-
-    for(int i = 0; i < 10; i++){
-        pi.drink_rum();
-        pi.hows_goin_mate();
-        cout << endl;
-    }
-
-    return 0;
-}
+#endif /* oop_07_hpp */
