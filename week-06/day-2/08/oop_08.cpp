@@ -30,13 +30,13 @@ int main() {
     // grades
 
     Student st;
-
-    for(int i = 0; i < 6 ; i++){
+    int size = 5
+    for(int i = 0; i < size ; i++){
         int num = rand() % 5 + 1;
         st.add_grade(num);
         cout << num << " added" << endl;
-
     }
+    
     cout << "The avg is: " << st.get_avarage() << endl;
 
 
