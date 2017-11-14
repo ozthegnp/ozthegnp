@@ -16,8 +16,8 @@
 | :wrench: Day 1: |Speech training, Debugging  | :palm_tree: Day 1: |Memorial Day|
 | :sun_with_face: Day 2: |[Typecasting](https://github.com/greenfox-academy/ozthegnp/tree/master/week-03/day-1)|:sun_with_face: Day 2: |[Pointer](https://github.com/greenfox-academy/ozthegnp/tree/master/week-04/day-1)|
 | :sun_with_face: Day 3: |[Practicing](https://github.com/greenfox-academy/ozthegnp/tree/master/week-03/day-2)|:sun_with_face: Day 3: |[Structure, Union](https://github.com/greenfox-academy/ozthegnp/tree/master/week-04/day-2)|
-| :sun_with_face: Day 4: |[CLI Calculator](https://github.com/greenfox-academy/ozthegnp/tree/master/week-03/calculator/calculator)|:sun_with_face: Day 4: |[Todo App]()|
-| :sun_with_face: Day 5: |[CLI Calculator](https://github.com/greenfox-academy/ozthegnp/tree/master/week-03/calculator/calculator)|:sun_with_face: Day 5: |Todo App|
+| :sun_with_face: Day 4: |[CLI Calculator](https://github.com/greenfox-academy/ozthegnp/tree/master/week-03/calculator/calculator)|:sun_with_face: Day 4: |[Todo App](https://github.com/greenfox-academy/ozthegnp/tree/master/week-04/todo_app)|
+| :sun_with_face: Day 5: |[CLI Calculator](https://github.com/greenfox-academy/ozthegnp/tree/master/week-03/calculator/calculator)|:sun_with_face: Day 5: |[Todo App](https://github.com/greenfox-academy/ozthegnp/tree/master/week-04/todo_app)|
 
 | :white_check_mark: **Week 5** | |:white_check_mark: **Week 6**||
 | ---- |---- |----- |----- |
