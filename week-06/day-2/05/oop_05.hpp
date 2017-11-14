@@ -1,3 +1,14 @@
+//
+//  oop_05.hpp
+//  cpp_playground
+//
+//  Created by Oz on 11/14/17.
+//  Copyright © 2017 Oscar Inc. All rights reserved.
+//
+
+#ifndef oop_05_hpp
+#define oop_05_hpp
+
 #include <iostream>
 #include <string>
 
@@ -7,26 +18,9 @@ class Circle {
 private:
     double rad;
 public:
-    Circle(double rad){
-        this->rad = rad;
-    }
-    double get_circum(){
-        return 2 * rad * 3.14;
-    }
-    double get_area(){
-        return rad * rad * 3.14;
-    }
+    Circle(double rad);
+    double get_circum();
+    double get_area();
 };
-int main() {
-    // Create a `Circle` class that takes it's radius as cinstructor parameter
-    // It should have a `get_circumference` method that returns it's circumference
-    // It should have a `get_area` method that returns it's area
 
-    Circle ci(5);
-
-    cout << "Circum is: " << ci.get_circum() << endl;
-    cout << "Area is: " << ci.get_area() << endl;
-
-
-    return 0;
-}
+#endif /* oop_05_hpp */
