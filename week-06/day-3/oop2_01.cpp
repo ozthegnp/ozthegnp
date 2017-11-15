@@ -19,7 +19,7 @@ public:
 class Circle: public Shape {
 private:
     double calc_are(){
-        return area = (width / 2) * (width / 2) * 3.14;
+        return area = width * width / 4 * 3.14;
     }
 public:
     void print_area(){
