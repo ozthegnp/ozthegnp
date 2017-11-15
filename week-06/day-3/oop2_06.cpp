@@ -54,14 +54,17 @@ public:
 
         if(curr == NULL){
 
-            cout << delData << "was not in the list" << endl;
+            cout << delData << " was not in the list" << endl;
             delete delPtr;
 
         } else{
-
             delPtr = curr;
             curr = curr->next;
             temp->next = curr;
+            if(delPtr == head){
+                head = head->next;
+                temp = NULL;
+            }
             delete delPtr;
             cout << "The value " << delData << " was deleted" << endl;
 
@@ -70,12 +73,28 @@ public:
 
     void PrintList(){
         curr = head;
-
+        while(curr != NULL) {
+            cout << curr->data << endl;
+            curr = curr->next;
+        }
     }
 
 };
 
 int main()
 {
+    List ls;
+
+    ls.addNode(23);
+    ls.addNode(54);
+    ls.addNode(90);
+    ls.addNode(7);
+
+    ls.PrintList();
+
+    ls.deleteNode(1);
+    ls.deleteNode(23);
+    ls.PrintList();
+
     return 0;
 }
