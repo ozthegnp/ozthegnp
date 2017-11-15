@@ -23,6 +23,6 @@
 | ---- |---- |----- |----- |
 | :sun_with_face: Day 1: |Stress training and Practice   | :sun_with_face: Day 1: |[C++, Introduction](https://github.com/greenfox-academy/ozthegnp/tree/master/week-06/day-1)|
 | :sun_with_face: Day 2: |[Practice day](https://github.com/greenfox-academy/ozthegnp/tree/master/week-05)|:sun_with_face: Day 2: |[C++, OOP](https://github.com/greenfox-academy/ozthegnp/tree/master/week-06/day-2)|
-| :palm_tree: Day 3: |National Holiday|:sun_with_face: Day 3: |C++, OOP|
+| :palm_tree: Day 3: |National Holiday|:sun_with_face: Day 3: |[C++, OOP](https://github.com/greenfox-academy/ozthegnp/tree/master/week-06/day-3)|
 | :sun_with_face: Day 4: |[Practice day](https://github.com/greenfox-academy/ozthegnp/tree/master/week-05)|:sun_with_face: Day 4: |C++ CLI Calculator|
 | :sun_with_face: Day 5: |[1st Exam](https://github.com/ozthegnp/static-foundation-exam-1st)|:sun_with_face: Day 5: |C++ CLI Calculator|
