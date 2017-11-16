@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2DCE37AD1FBD8C6400E5E808 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2DCE37AC1FBD8C6400E5E808 /* main.cpp */; };
 		2DCE37B51FBDB9D000E5E808 /* todo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2DCE37B31FBDB9D000E5E808 /* todo.cpp */; };
+		2DCE37B81FBDD13600E5E808 /* commands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2DCE37B61FBDD13600E5E808 /* commands.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 		2DCE37AC1FBD8C6400E5E808 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		2DCE37B31FBDB9D000E5E808 /* todo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = todo.cpp; sourceTree = "<group>"; };
 		2DCE37B41FBDB9D000E5E808 /* todo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = todo.hpp; sourceTree = "<group>"; };
+		2DCE37B61FBDD13600E5E808 /* commands.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = commands.cpp; sourceTree = "<group>"; };
+		2DCE37B71FBDD13600E5E808 /* commands.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = commands.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +66,8 @@
 				2DCE37AC1FBD8C6400E5E808 /* main.cpp */,
 				2DCE37B31FBDB9D000E5E808 /* todo.cpp */,
 				2DCE37B41FBDB9D000E5E808 /* todo.hpp */,
+				2DCE37B61FBDD13600E5E808 /* commands.cpp */,
+				2DCE37B71FBDD13600E5E808 /* commands.hpp */,
 			);
 			path = cpp_todo_app;
 			sourceTree = "<group>";
@@ -125,6 +130,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DCE37AD1FBD8C6400E5E808 /* main.cpp in Sources */,
+				2DCE37B81FBDD13600E5E808 /* commands.cpp in Sources */,
 				2DCE37B51FBDB9D000E5E808 /* todo.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
