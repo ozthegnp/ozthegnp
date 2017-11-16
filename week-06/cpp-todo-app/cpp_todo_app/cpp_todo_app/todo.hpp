@@ -11,38 +11,46 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
 class Todo_app_class{
 private:
-    
-    void goodbye_screen();
-    void command_input();
-    void clear_screen();
-    void print_usage();
     void command_splitter(string user_input);
     
 protected:
+    struct task_struct{
+        string description;
+        int priority;
+        bool completed;
+    };
+    
     string user_input;
     string command;
     string task;
     string priority;
+    vector<task_struct> task_vector;
     
-    typedef struct task_struct{
-        string description;
-        int priority;
-        bool completed;
-    }Task_s;
-    
+    void clear_screen();
+
 public:
     Todo_app_class(){ //starts prg with print usage and input
-        print_usage();
-        command_input();
     }
     ~Todo_app_class(){
-        goodbye_screen();
+    }
+    void goodbye_screen();
+    void input_command();
+    void print_usage();
+    void task_executer(string command, string task, string priority);
+    void print_vector(){
+        for(unsigned int i = 0; i < task_vector.size(); i++){
+            cout << task_vector[i].description <<" ";
+            cout << task_vector[i].priority << " ";
+            cout << task_vector[i].completed << endl;
+        }
     }
 };
+
 
 #endif /* todo_hpp */

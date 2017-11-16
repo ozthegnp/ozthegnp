@@ -7,19 +7,20 @@
 //
 
 #include "todo.hpp"
+
 #include <sstream>
 
-void Todo_app_class::command_input(){
+void Todo_app_class::input_command(){
     
     while(command != "exit"){
         cout << "Your wish is my command: ";
         getline(cin, user_input);
         command_splitter(user_input);
-        
-        
+        task_executer(command, task, priority);
     }
 }
 void Todo_app_class::command_splitter(string user_input){
+    
     size_t pos = user_input.find(' ');//looks for char
     
     command = user_input.substr(0, pos);//fills up string until char
@@ -32,6 +33,48 @@ void Todo_app_class::command_splitter(string user_input){
     user_input.erase(0, pos + 2);
     
     priority = user_input;
+}
+
+void Todo_app_class::task_executer(string command, string task, string priority){
+    if(command == "-a"){
+        cout << "you want to add" << endl;
+        if(priority != ""){
+        struct task_struct temp_struct = {task, stoi(priority), 0};
+        task_vector.push_back(temp_struct);
+        }else{
+            struct task_struct temp_struct = {task, 0, 0};
+            task_vector.push_back(temp_struct);
+        }
+        print_vector();
+        
+    } else if(command == "-wr"){
+        cout << "you want to write" << endl;
+        
+    } else if(command == "-rd"){
+        cout << "you want to read" << endl;
+        
+    } else if(command == "-l"){
+        cout << "you want to list" << endl;
+        
+    } else if(command == "-e"){
+        cout << "you want to empty" << endl;
+        
+    } else if(command == "-rm"){
+        cout << "you want to remove" << endl;
+        
+    } else if(command == "-c"){
+        cout << "you want to complete" << endl;
+        
+    } else if(command == "-p"){
+        cout << "you want to add priority" << endl;
+        
+    } else if(command == "-lp"){
+        cout << "you want to list by priority" << endl;
+        
+    } else if(command == "exit"){
+    } else{
+        cout << "invalid command" << endl;
+    }
 }
 
 void Todo_app_class::clear_screen(){
