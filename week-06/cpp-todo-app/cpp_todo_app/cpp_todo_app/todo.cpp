@@ -37,14 +37,7 @@ void Todo_app_class::command_splitter(string user_input){
 
 void Todo_app_class::task_executer(string command, string task, string priority){
     if(command == "-a"){
-        cout << "you want to add" << endl;
-        if(priority != ""){
-        struct task_struct temp_struct = {task, stoi(priority), 0};
-        task_vector.push_back(temp_struct);
-        }else{
-            struct task_struct temp_struct = {task, 0, 0};
-            task_vector.push_back(temp_struct);
-        }
+        add_task_function();
         print_vector();
         
     } else if(command == "-wr"){
@@ -74,6 +67,16 @@ void Todo_app_class::task_executer(string command, string task, string priority)
     } else if(command == "exit"){
     } else{
         cout << "invalid command" << endl;
+    }
+}
+void Todo_app_class::add_task_function(){
+    cout << "you want to add" << endl;
+    if(priority != ""){
+        struct task_struct temp_struct = {task, stoi(priority), 0};
+        task_vector.push_back(temp_struct);
+    }else{
+        struct task_struct temp_struct = {task, 0, 0};
+        task_vector.push_back(temp_struct);
     }
 }
 
@@ -110,4 +113,21 @@ void Todo_app_class::print_usage(){
 
 void Todo_app_class::goodbye_screen(){
     cout << "Thank you for using this awesome calculator" << endl;
+}
+
+void Todo_app_class::print_vector(){
+    for(unsigned int i = 0; i < task_vector.size(); i++){
+        cout << i + 1;
+        if(task_vector[i].completed == 0){
+            cout << " - [ ] ";
+        }else{
+            cout << " - [x] ";
+        }
+        cout << task_vector[i].description;
+        
+        if(task_vector[i].priority != 0){
+            cout << " - " <<task_vector[i].priority;
+        }
+        cout << endl;
+    }
 }

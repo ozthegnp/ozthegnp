@@ -18,6 +18,7 @@ using namespace std;
 class Todo_app_class{
 private:
     void command_splitter(string user_input);
+    void add_task_function();
     
 protected:
     struct task_struct{
@@ -43,13 +44,7 @@ public:
     void input_command();
     void print_usage();
     void task_executer(string command, string task, string priority);
-    void print_vector(){
-        for(unsigned int i = 0; i < task_vector.size(); i++){
-            cout << task_vector[i].description <<" ";
-            cout << task_vector[i].priority << " ";
-            cout << task_vector[i].completed << endl;
-        }
-    }
+    void print_vector();
 };
 
 
