@@ -28,6 +28,7 @@ protected:
     };
     
     string user_input;
+    size_t comma_count = 0;
     string command;
     string task;
     string priority;
@@ -44,7 +45,7 @@ public:
     void input_command();
     void print_usage();
     void task_executer(string command, string task, string priority);
-    void print_vector();
+    void print_tasks();
 };
 
 
