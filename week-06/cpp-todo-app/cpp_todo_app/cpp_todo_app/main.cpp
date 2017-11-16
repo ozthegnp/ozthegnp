@@ -11,6 +11,7 @@
 #include <sstream>
 #include <fstream>
 #include <stdlib.h>
+#include <vector>
 
 using namespace std;
 
@@ -53,6 +54,11 @@ void command_input(){
     cout << command << endl;
     cout << todo_text << endl;
 }
+
+class Todo_list_Class{
+        
+        string task
+};
 int main(int argc, const char * argv[]) {
     command_input();
     
