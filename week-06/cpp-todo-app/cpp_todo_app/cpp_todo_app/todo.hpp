@@ -34,7 +34,7 @@ protected:
     string task;
     string priority;
 public:
-    Todo_app_class(){ //starts prg with print usage and input
+    Todo_app_class(){ //starts prg with print usage and input 
         print_usage();
         command_input();
     }
