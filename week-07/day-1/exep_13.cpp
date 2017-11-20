@@ -15,32 +15,20 @@ int main() {
     time_t start = time(0);
     time_t now = time(0);
 
-   try{
-       bool flag = true;
+    string input;
 
-       while((now - start) < 11){
-           if (time(0) > now){
-               if(now % 2 == 0)
-                   cout << "TICK ";
-               else
-                   cout << "TOCK ";
-               now = time(0);
-               cout << now - start << "...";
-           }
-           if (flag){
-               cout << "press any key" << endl;
-               flag = false;
-           }
+    try{
+        cout << "Insert anything in 10 sec: " << endl;
 
+        getline(cin, input);
+        now = time(0);
 
-       }
-       cout << endl << "Time's up!!" <<  endl;
+        if(now - start > 10){
+            throw now - start;
+        }
+        cout << "Good job! Your time: "  << now - start << "s" << endl;
 
-    }catch(runtime_error &err){
-        cout << err.what() << endl;
-
-    }
-
-
-
+    } catch(long i){
+        cout << "Too late! Your time: "  << i << "s" << endl;
+        }
 }
