@@ -26,15 +26,15 @@ int main() {
                     throw 12;
                     break;
             }
-        }catch(float i){
+        } catch(float i){
             cout << "float err: " << i << endl;
-        }catch(double i){
+        } catch(double i){
             cout << "double  err: " << i << endl;
-        }catch(char const* i){
+        } catch(char const* i){
             cout << "string err: " << i << endl;
-        }catch(bool i){
+        } catch(bool i){
             cout << "bool err: " << i << endl;
-        }catch(int i){
+        } catch(int i){
             cout << "int err: "<< i << endl;
         }
         // Write catch blocks for each possibly thrown exception.
