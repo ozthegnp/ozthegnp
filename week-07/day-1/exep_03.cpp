@@ -11,7 +11,16 @@ using namespace std;
 
 int main() {
     try{
+
+      int a = 1;
+      int b = 0;
+
+      if(b == 0){
         throw runtime_error("a");
+      }
+
+      cout << a/b << endl;
+
     } catch(runtime_error &err){
         cout << err.what();
     }
