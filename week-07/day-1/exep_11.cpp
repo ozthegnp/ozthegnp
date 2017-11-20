@@ -26,16 +26,16 @@ int main() {
                     throw 12;
                     break;
             }
-        }catch(int i){
-            cout << "error is: " << i << endl;
+        }catch(float i){
+            cout << "float err: " << i << endl;
         }catch(double i){
-            cout << "error is: " << i << endl;
+            cout << "double  err: " << i << endl;
         }catch(char const* i){
-            cout << "error is: " << i << endl;
+            cout << "string err: " << i << endl;
         }catch(bool i){
-            cout << "error is: " << i << endl;
-        }catch(...){
-            cout << "error is weird " << endl;
+            cout << "bool err: " << i << endl;
+        }catch(int i){
+            cout << "int err: "<< i << endl;
         }
         // Write catch blocks for each possibly thrown exception.
         // In each catch block write out what the exception's type was. And what the exceptions value was.
