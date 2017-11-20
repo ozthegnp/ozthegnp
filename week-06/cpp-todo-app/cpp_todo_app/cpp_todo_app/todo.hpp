@@ -23,6 +23,7 @@ private:
     void complete_task_function();
     void delete_all_tasks();
     void add_priority();
+    void list_priority();
 
     
 protected:

@@ -35,7 +35,6 @@ void Todo_app_class::command_splitter(string user_input){
     
     priority = user_input;
     
-    
 }
 
 void Todo_app_class::task_executer(string command, string task, string priority){
@@ -64,8 +63,7 @@ void Todo_app_class::task_executer(string command, string task, string priority)
         add_priority();
         
     } else if(command == "-lp"){
-        cout << "you want to list by priority" << endl;
-        
+        list_priority();
     } else if(command == "exit"){
     } else{
         cout << "invalid command" << endl;
@@ -141,6 +139,23 @@ void Todo_app_class::add_priority(){
         }
     }else{
         cout << "please insert number between two commas" << endl;
+    }
+}
+
+void Todo_app_class::list_priority(){
+    bool flag = true;
+    task_struct temp;
+    
+    while(flag){
+        for(unsigned int i = 0; i < task_vector.size() - 1; ++i){
+            flag = false;
+            if(task_vector[i].priority > task_vector[i + 1].priority){
+                temp = task_vector[i];
+                task_vector[i] = task_vector[i + 1];
+                task_vector[i + 1] = temp;
+                flag = true;
+            }
+        }
     }
 }
 
