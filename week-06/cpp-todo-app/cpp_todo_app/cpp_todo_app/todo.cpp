@@ -33,12 +33,15 @@ void Todo_app_class::command_splitter(string user_input){
     
     user_input.erase(0, pos + 2);
     
+    priority = user_input;
+    
     
 }
 
 void Todo_app_class::task_executer(string command, string task, string priority){
     if(command == "-a"){
         add_task_function();
+        
     } else if(command == "-wr"){
         cout << "you want to write" << endl;
         
@@ -47,17 +50,18 @@ void Todo_app_class::task_executer(string command, string task, string priority)
         
     } else if(command == "-l"){
         print_tasks();
-
+        
     } else if(command == "-e"){
-        cout << "you want to empty" << endl;
+        delete_all_tasks();
         
     } else if(command == "-rm"){
         delete_task_function();
+        
     } else if(command == "-c"){
-        cout << "you want to complete" << endl;
+        complete_task_function();
         
     } else if(command == "-p"){
-        cout << "you want to add priority" << endl;
+        add_priority();
         
     } else if(command == "-lp"){
         cout << "you want to list by priority" << endl;
@@ -106,8 +110,34 @@ void Todo_app_class::complete_task_function(){
             cout << "element does not exist" << endl;
             
         }else{
-            task_vector.erase(task_vector.begin() + a - 1);
-            cout << "task " << a << " deleted." << endl;
+            task_vector[a - 1].completed = true;
+            cout << "task " << a << " completed." << endl;
+        }
+    }else{
+        cout << "please insert number between two commas" << endl;
+    }
+}
+
+void Todo_app_class::delete_all_tasks(){
+    if( 0 < task_vector.size()){
+        task_vector.clear();
+        cout << "All tasks deleted" << endl;
+    } else{
+        cout << "task's already empty" << endl;
+    }
+}
+
+void Todo_app_class::add_priority(){
+    if(comma_count == 2){
+        int position = stoi(task) - 1;
+
+        
+        if(position > task_vector.size() || position < 0){
+            cout << "element does not exist" << endl;
+            
+        }else{
+            task_vector[position].priority = stoi(priority);
+            cout << task_vector[position].priority << " is added to " << task_vector[position].description << endl;
         }
     }else{
         cout << "please insert number between two commas" << endl;
@@ -138,18 +168,22 @@ void Todo_app_class::goodbye_screen(){
 }
 
 void Todo_app_class::print_tasks(){
-    for(unsigned int i = 0; i < task_vector.size(); i++){
-        cout << i + 1;
-        if(task_vector[i].completed == 0){
-            cout << " - [ ] ";
-        }else{
-            cout << " - [x] ";
+    if (task_vector.size() != 0){
+        for(unsigned int i = 0; i < task_vector.size(); i++){
+            cout << i + 1;
+            if(task_vector[i].completed == 0){
+                cout << " - [ ] ";
+            }else{
+                cout << " - [x] ";
+            }
+            cout << task_vector[i].description;
+            
+            if(task_vector[i].priority != 0){
+                cout << " - " <<task_vector[i].priority;
+            }
+            cout << endl;
         }
-        cout << task_vector[i].description;
-        
-        if(task_vector[i].priority != 0){
-            cout << " - " <<task_vector[i].priority;
-        }
-        cout << endl;
+    } else{
+        cout << "list is empty, good job!" << endl;
     }
 }

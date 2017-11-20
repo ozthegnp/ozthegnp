@@ -21,6 +21,9 @@ private:
     void add_task_function();
     void delete_task_function();
     void complete_task_function();
+    void delete_all_tasks();
+    void add_priority();
+
     
 protected:
     struct task_struct{
