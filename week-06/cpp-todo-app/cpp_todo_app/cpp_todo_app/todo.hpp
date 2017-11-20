@@ -19,6 +19,8 @@ class Todo_app_class{
 private:
     void command_splitter(string user_input);
     void add_task_function();
+    void delete_task_function();
+    void complete_task_function();
     
 protected:
     struct task_struct{

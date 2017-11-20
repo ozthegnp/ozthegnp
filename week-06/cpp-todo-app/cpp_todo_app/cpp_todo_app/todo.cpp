@@ -52,8 +52,7 @@ void Todo_app_class::task_executer(string command, string task, string priority)
         cout << "you want to empty" << endl;
         
     } else if(command == "-rm"){
-        cout << "you want to remove" << endl;
-        
+        delete_task_function();
     } else if(command == "-c"){
         cout << "you want to complete" << endl;
         
@@ -81,8 +80,38 @@ void Todo_app_class::add_task_function(){
     }else{
         cout << "please insert task between two commas" << endl;
     }
-    
+}
 
+void Todo_app_class::delete_task_function(){
+    if(comma_count == 2){
+        int a = stoi(task);
+        
+        if(a > task_vector.size() || a < 0){
+            cout << "element does not exist" << endl;
+            
+        }else{
+            task_vector.erase(task_vector.begin() + a - 1);
+            cout << "task " << a << " deleted." << endl;
+        }
+    }else{
+        cout << "please insert number between two commas" << endl;
+    }
+}
+
+void Todo_app_class::complete_task_function(){
+    if(comma_count == 2){
+        int a = stoi(task);
+        
+        if(a > task_vector.size() || a < 0){
+            cout << "element does not exist" << endl;
+            
+        }else{
+            task_vector.erase(task_vector.begin() + a - 1);
+            cout << "task " << a << " deleted." << endl;
+        }
+    }else{
+        cout << "please insert number between two commas" << endl;
+    }
 }
 
 void Todo_app_class::clear_screen(){
