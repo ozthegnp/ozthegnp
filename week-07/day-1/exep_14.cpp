@@ -17,5 +17,4 @@ public:
 };
 int main() {
     Person p;
-
 }
