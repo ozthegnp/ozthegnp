@@ -5,13 +5,13 @@
 
 using namespace std;
 
-// Create a function which throws an char
+// Create a function which throws an integer
 // In the main(), put that function in a try block
 // Also in the main() catch, what your function throws
 
 void null_check(int b){
     if(b == 0)
-        throw 9;
+        throw runtime_error("it is zero, dont do it\n");
 }
 
 int main() {
@@ -25,8 +25,8 @@ int main() {
 
         cout << a/b << endl;
 
-    } catch(int a){
-        cout << a << endl;
+    } catch(runtime_error &err){
+        cout << err.what();
     }
     return 0;
 }
