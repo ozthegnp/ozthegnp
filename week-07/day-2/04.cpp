@@ -15,7 +15,7 @@ public:
     void set_a(int a){
         this->a = a;
     }
-    int add(Integer param1){
+    int add(Integer& param1){
         return a + param1.a;
     }
     int add(Integer& param1, Integer& param2){
