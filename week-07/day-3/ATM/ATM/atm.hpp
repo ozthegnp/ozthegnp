@@ -55,6 +55,7 @@ protected:
     void admin_interface();
     void user_interface();
     void cash_insert();
+    bool continue_prompt();
     
 public:
     void addAccount(Account &acc);

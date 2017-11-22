@@ -16,28 +16,34 @@ void configureAccounts(ATM* atm) {
 }
 
 void ATM::login(){
-    while(1){
+    bool attempt_permission = true;
+    int attempts = 0;
+    bool username_flag = true;
+    
+    while(attempt_permission){
+        
         int account_position = -1;
         int pin_check;
         string username_check = "";
-    
-        cout << "type username: ";
-        cin >> username_check;
         
         try{
-            
-        for(unsigned int i = 0; i < account_vector.size(); i++){
-            if(username_check == account_vector[i].get_username()){
-                account_position = i;
+            if(username_flag){
+                cout << "type username: ";
+                cin >> username_check;
             }
-        }
+                
+            for(unsigned int i = 0; i < account_vector.size(); i++){
+                if(username_check == account_vector[i].get_username()){
+                    account_position = i;
+                }
+            }
+                
+            if(account_position == -1){
+                throw runtime_error("account not found");
+            }
             
-        if(account_position == -1){
-            throw runtime_error("account not found");
-        }
-        
-        cout << "please enter PIN" << endl;
-        cin >> pin_check;
+            cout << "please enter PIN" << endl;
+            cin >> pin_check;
             
         if(pin_check != account_vector[account_position].get_pin()){
             throw runtime_error("invalid pin");
@@ -50,7 +56,6 @@ void ATM::login(){
             }
         }catch(runtime_error &err){
             cout << err.what() << endl;
-            username_check = "";
         }
     }
 }
@@ -65,13 +70,6 @@ void ATM::admin_interface(){
     
     cash_insert();
     
-    
-    
-    if (yes_no){
-        cash_insert();
-    }
-
-
 }
 void ATM::user_interface(){
     cout << "=== USER INTERFACE ===" << endl;
@@ -87,13 +85,29 @@ void ATM::cash_insert(){
     ATM_balance += cash_insert;
     
     cout << "Success! New Balance: $" << ATM_balance <<endl << endl;
+    
+    if(continue_prompt()){
+        ATM::cash_insert();
+    }
 }
 
 bool ATM::continue_prompt(){
-    char yes_no;
+    char yes_no = 0;
+    bool flag = true;
     
-    cout << "Do you wish to add more?(y/n)" << endl;
-    cin >> yes_no;
-    
-    if(yes_no == 'y')
+    while(flag){
+        cout << "Do you wish to continue?(y/n)" << endl;
+        cin >> yes_no;
+        
+        if(yes_no == 'y' || yes_no == 'n'){
+            flag = false;
+        } else{
+            cout << "invalid input" << endl;
+        }
+    }
+    if(yes_no == 'y'){
+        return 1;
+    } else{
+        return 0;
+    }
 }
