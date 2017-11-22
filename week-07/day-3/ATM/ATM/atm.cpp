@@ -16,50 +16,64 @@ void configureAccounts(ATM* atm) {
 }
 
 void ATM::login(){
-    bool attempt_permission = true;
-    int attempts = 0;
-    bool username_flag = true;
     
     while(attempt_permission){
         
-        int account_position = -1;
         int pin_check;
-        string username_check = "";
         
         try{
             if(username_flag){
+                username_check = "";
                 cout << "type username: ";
                 cin >> username_check;
-            }
+            
                 
-            for(unsigned int i = 0; i < account_vector.size(); i++){
-                if(username_check == account_vector[i].get_username()){
-                    account_position = i;
+                for(unsigned int i = 0; i < account_vector.size(); i++){
+                    if(username_check == account_vector[i].get_username()){
+                        account_position = i;
+                    }
+                }
+                
+                if(account_position == -1){
+                    throw runtime_error("account not found");
                 }
             }
-                
-            if(account_position == -1){
-                throw runtime_error("account not found");
+            
+            username_flag = false;
+
+            if(account_vector[account_position].get_balance() < 0){
+                attempt_permission = false;
             }
             
             cout << "please enter PIN" << endl;
             cin >> pin_check;
             
-        if(pin_check != account_vector[account_position].get_pin()){
-            throw runtime_error("invalid pin");
-        }
+            if(pin_check != account_vector[account_position].get_pin()){
+                attempts++;
+                if(attempts > 2){
+                    attempt_permission = false;
+                }
+                throw runtime_error("invalid pin");
+            }
         
             if(account_vector[account_position].get_balance() != pin_check - (2 * pin_check)){
                 user_interface();
             } else{
                 admin_interface();
+                
             }
         }catch(runtime_error &err){
             cout << err.what() << endl;
         }
     }
 }
-
+void ATM::reset_login(){
+    username_check = "";
+    attempt_permission = true;
+    username_flag = true;
+    attempts = 0;
+    account_position = -1;
+}
 void ATM::addAccount(Account &acc){
     account_vector.push_back(acc);
 }
@@ -69,10 +83,13 @@ void ATM::admin_interface(){
     cout << "- insert cash in the atm" << endl << endl;
     
     cash_insert();
-    
+    reset_login();
+
 }
 void ATM::user_interface(){
     cout << "=== USER INTERFACE ===" << endl;
+    reset_login();
+
 }
 
 void ATM::cash_insert(){

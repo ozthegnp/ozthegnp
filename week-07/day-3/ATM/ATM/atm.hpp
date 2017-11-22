@@ -49,6 +49,11 @@ public:
 
 class ATM {
 private:
+    bool attempt_permission = true;
+    int attempts = 0;
+    bool username_flag = true;
+    int account_position = -1;
+    string username_check = "";
     double ATM_balance = 0;
 protected:
     vector<Account> account_vector;
@@ -56,6 +61,7 @@ protected:
     void user_interface();
     void cash_insert();
     bool continue_prompt();
+    void reset_login();
     
 public:
     void addAccount(Account &acc);

@@ -20,6 +20,8 @@ int main() {
     ATM atm;
     configureAccounts(&atm);
     atm.login();
+    cout << "ATM exited" << endl;
+
     
 
     return 0;
