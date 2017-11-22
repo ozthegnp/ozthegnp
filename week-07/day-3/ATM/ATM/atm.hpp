@@ -50,7 +50,14 @@ public:
     }
 };
 
-class ATM {
+class User_functions {
+protected:
+    void hello(){
+        cout << "hello";
+    }
+};
+
+class ATM: public User_functions {
 private:
     bool attempt_permission = true;
     int attempts = 0;

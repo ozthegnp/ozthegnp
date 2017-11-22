@@ -17,6 +17,8 @@ void configureAccounts(ATM* atm) {
 
 void ATM::login(){
     
+    hello();
+    
     while(attempt_permission){
         
         int pin_check;
@@ -89,9 +91,12 @@ void ATM::admin_interface(){
 void ATM::user_interface(int position){
     cout << "=== USER INTERFACE ===" << endl;
     cout << "Welcome! As a user you are able to: " << endl;
+    cout << "0 - check richest person" << endl;
     cout << "1 - check your balance" << endl;
-    cout << "2 - withdraw cash from the atm" << endl << endl;
-    cout << "enter your command: " << endl;
+    cout << "2 - deposit cash" << endl;
+    cout << "3 - withdraw cash" << endl << endl;
+
+    //cout << "enter your command: " << endl;
     
     get_richest();
     user_balance(position);
@@ -103,22 +108,22 @@ void ATM::user_interface(int position){
 
 }
 void ATM::user_balance(int position){
-    cout << "Your balance is: $"<<account_vector[position].get_balance() << endl;
+    cout << "Your balance is: $"<<account_vector[position].get_balance() << endl << endl;
     
 }
 void ATM::deposit_cash(int position){
-    int amount;
-    cout << "How much would you like to deposit??" << endl;
-    cin >> amount;
+    cout << "To deposit cash, please enter the amount of bills:" << endl;
+    int amount = bill_summarizor();
+    
     account_vector[position].set_balance(amount);
-    cout << "Deposit succeeded. Your new balance is $" << account_vector[position].get_balance() <<endl;
+    cout << "Your new balance is $" << account_vector[position].get_balance() <<endl;
 }
 void ATM::withdraw_cash(int position){
     int amount;
     cout << "How much would you like to withdraw??" << endl;
     cin >> amount;
     account_vector[position].set_balance(-amount);
-    cout << "Deposit succeeded. Your new balance is $" << account_vector[position].get_balance() <<endl;
+    cout << "Your new balance is $" << account_vector[position].get_balance() <<endl;
 }
 void ATM::get_richest(){
     string richest = account_vector[0].get_username();
@@ -133,12 +138,9 @@ void ATM::get_richest(){
     
 }
 void ATM::cash_insert(){
-    double cash_insert;
     
-    cout << "How much cash would you like to insert?" << endl;
-    cin >> cash_insert;
-    
-    ATM_balance += cash_insert;
+    cout << "To deposit cash, please enter the amount of bills:" << endl;
+    ATM_balance += bill_summarizor();
     
     cout << "Success! New Balance: $" << ATM_balance <<endl << endl;
     
@@ -171,14 +173,18 @@ int ATM::bill_summarizor(){
     int sum = 0;
     
     sum += bill_counter(20);
+    sum += bill_counter(10);
+    sum += bill_counter(5);
+    sum += bill_counter(1);
+    cout << "Deposit succeeded. $" << sum << " added in total."<< endl;
     return sum;
 }
 
 int ATM::bill_counter(int  bill){
     int bill_count = 0;
-    cout << "How many $"<< bill << "bill(s) you're adding?"<< endl;
+    cout << "How many $"<< bill << " bill(s) you're adding? ";
     cin >> bill_count;
-    cout << "$"<< bill * bill_count << "added" << endl;
+    cout << "$"<< bill * bill_count << " added" << endl;
     return bill * bill_count;
 }
 
