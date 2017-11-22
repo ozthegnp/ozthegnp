@@ -57,7 +57,7 @@ void ATM::login(){
             }
         
             if(account_vector[account_position].get_balance() != pin_check - (2 * pin_check)){
-                user_interface();
+                user_interface(account_position);
             } else{
                 admin_interface();
                 
@@ -86,17 +86,42 @@ void ATM::admin_interface(){
     reset_login();
 
 }
-void ATM::user_interface(){
+void ATM::user_interface(int position){
     cout << "=== USER INTERFACE ===" << endl;
+    cout << "Welcome! As a user you are able to: " << endl;
+    cout << "1 - check your balance" << endl;
+    cout << "2 - withdraw cash from the atm" << endl << endl;
+    cout << "enter your command: " << endl;
+    user_balance(position);
+    deposit_cash(position);
+    withdraw_cash(position);
+
     reset_login();
 
+}
+void ATM::user_balance(int position){
+    cout << "Your balance is: $"<<account_vector[position].get_balance() << endl;
+    
+}
+void ATM::deposit_cash(int position){
+    int amount;
+    cout << "How much would you like to deposit??" << endl;
+    cin >> amount;
+    account_vector[position].set_balance(amount);
+    cout << "Deposit succeeded. Your new balance is $" << account_vector[position].get_balance() <<endl;
+}
+void ATM::withdraw_cash(int position){
+    int amount;
+    cout << "How much would you like to withdraw??" << endl;
+    cin >> amount;
+    account_vector[position].set_balance(-amount);
+    cout << "Deposit succeeded. Your new balance is $" << account_vector[position].get_balance() <<endl;
 }
 
 void ATM::cash_insert(){
     double cash_insert;
     
     cout << "How much cash would you like to insert?" << endl;
-
     cin >> cash_insert;
     
     ATM_balance += cash_insert;

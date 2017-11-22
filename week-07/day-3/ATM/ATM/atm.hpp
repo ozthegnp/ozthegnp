@@ -45,6 +45,9 @@ public:
     int get_balance(){
         return balance;
     }
+    void set_balance(double amount){
+         balance += amount;
+    }
 };
 
 class ATM {
@@ -58,7 +61,10 @@ private:
 protected:
     vector<Account> account_vector;
     void admin_interface();
-    void user_interface();
+    void user_interface(int position);
+    void user_balance(int position);
+    void deposit_cash(int position);
+    void withdraw_cash(int position);
     void cash_insert();
     bool continue_prompt();
     void reset_login();
