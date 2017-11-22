@@ -167,3 +167,18 @@ bool ATM::continue_prompt(){
         return 0;
     }
 }
+int ATM::bill_summarizor(){
+    int sum = 0;
+    
+    sum += bill_counter(20);
+    return sum;
+}
+
+int ATM::bill_counter(int  bill){
+    int bill_count = 0;
+    cout << "How many $"<< bill << "bill(s) you're adding?"<< endl;
+    cin >> bill_count;
+    cout << "$"<< bill * bill_count << "added" << endl;
+    return bill * bill_count;
+}
+

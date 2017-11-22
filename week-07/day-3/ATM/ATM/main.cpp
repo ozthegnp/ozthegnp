@@ -22,7 +22,5 @@ int main() {
     atm.login();
     cout << "ATM exited" << endl;
 
-    
-
     return 0;
 }
