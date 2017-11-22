@@ -65,6 +65,7 @@ protected:
     void user_balance(int position);
     void deposit_cash(int position);
     void withdraw_cash(int position);
+    void get_richest();
     void cash_insert();
     bool continue_prompt();
     void reset_login();

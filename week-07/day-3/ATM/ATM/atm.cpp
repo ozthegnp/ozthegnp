@@ -92,8 +92,11 @@ void ATM::user_interface(int position){
     cout << "1 - check your balance" << endl;
     cout << "2 - withdraw cash from the atm" << endl << endl;
     cout << "enter your command: " << endl;
+    
+    get_richest();
     user_balance(position);
     deposit_cash(position);
+    
     withdraw_cash(position);
 
     reset_login();
@@ -117,7 +120,18 @@ void ATM::withdraw_cash(int position){
     account_vector[position].set_balance(-amount);
     cout << "Deposit succeeded. Your new balance is $" << account_vector[position].get_balance() <<endl;
 }
-
+void ATM::get_richest(){
+    string richest = account_vector[0].get_username();
+    
+    for(unsigned int i = 1; i < account_vector.size(); ++i){
+        if(account_vector[i].get_balance() > account_vector[i - 1].get_balance()){
+            richest = account_vector[i].get_username();
+        }
+    }
+    
+    cout << "The richest person is: " << richest << endl;
+    
+}
 void ATM::cash_insert(){
     double cash_insert;
     
