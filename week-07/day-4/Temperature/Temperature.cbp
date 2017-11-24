@@ -12,6 +12,7 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c99" />
 					<Add option="-g" />
 				</Compiler>
 			</Target>
@@ -32,12 +33,22 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Data.cpp" />
+		<Unit filename="Data.h" />
+		<Unit filename="SerialPortWrapper.cpp" />
+		<Unit filename="SerialPortWrapper.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="rs232/rs232-linux.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="rs232/rs232-win.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="rs232/rs232.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
 			<debugger />
-			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
