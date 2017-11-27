@@ -93,12 +93,13 @@ int main(void)
   /* Add your application code here     */
   BSP_LED_Init(LED_GREEN);
   BSP_LED_On(LED_GREEN);
-
   /* Infinite loop */
   while (1)
   {
-	  //TODO:
-	  //Flash the ledwith 200 ms period time
+	  BSP_LED_Toggle(LED_GREEN);
+	  HAL_Delay(200);
+
+
 
   }
 }
