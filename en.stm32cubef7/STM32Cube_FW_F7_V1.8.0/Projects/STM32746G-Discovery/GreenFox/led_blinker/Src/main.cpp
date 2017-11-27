@@ -92,22 +92,14 @@ int main(void)
 
   /* Add your application code here     */
   BSP_LED_Init(LED_GREEN);
-  /* Infinite loop */
-  while (1)//SOS Loop
-  {
-	  for(int i = 0; i < 3; ++i){
-		  BSP_LED_On(LED_GREEN);
-		  HAL_Delay(300);
-		  BSP_LED_Off(LED_GREEN);
-		  HAL_Delay(200);
-	  }
-	  for(int i = 0; i < 3; ++i){
-	  		  BSP_LED_On(LED_GREEN);
-	  		  HAL_Delay(600);
-	  		  BSP_LED_Off(LED_GREEN);
-	  		  HAL_Delay(200);
-	  	  }
+  BSP_LED_On(LED_GREEN);
 
+  /* Infinite loop */
+  while (1)
+  {
+	  //TODO:
+	  BSP_LED_Toggle(LED_GREEN);
+	  HAL_Delay(200);
 
   }
 }
