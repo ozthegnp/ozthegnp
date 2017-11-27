@@ -89,6 +89,10 @@ int main(void)
   SystemClock_Config();
 
   //TODO:
+  BSP_LED_Init(LED_GREEN);
+  BSP_LED_On(LED_GREEN);
+  BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
+
   //Initialization the push button and the led with using BSP
   
   //Turn the led on to validate the initialization is occured.
@@ -99,6 +103,7 @@ int main(void)
   {
 	  //TODO:
 	  //Write a simple program witch flashes(toggle) the led when the button is pressed
+
   }
 }
 
