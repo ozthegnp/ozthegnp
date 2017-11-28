@@ -97,10 +97,8 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-	  //TODO:
 	  BSP_LED_Toggle(LED_GREEN);
 	  HAL_Delay(200);
-
   }
 }
 
