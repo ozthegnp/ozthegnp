@@ -37,6 +37,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include <vector>
 
 /** @addtogroup STM32F7xx_HAL_Examples
   * @{
@@ -91,14 +92,95 @@ int main(void)
 
 
   /* Add your application code here     */
-  BSP_LED_Init(LED_GREEN);
-  BSP_LED_On(LED_GREEN);
+  __HAL_RCC_GPIOA_CLK_ENABLE();    // we need to enable the GPIOA port's clock first
+  __HAL_RCC_GPIOF_CLK_ENABLE();    // we need to enable the GPIOF port's clock first
+
+
+  GPIO_InitTypeDef tda0;            // create a config structure
+  tda0.Pin = GPIO_PIN_0;            // this is about PIN 0
+  tda0.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
+  tda0.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
+  tda0.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+
+  HAL_GPIO_Init(GPIOA, &tda0);      // initialize the pin on GPIOA port with HAL
+
+  GPIO_InitTypeDef tda1;            // create a config structure
+  tda1.Pin = GPIO_PIN_10;            // this is about PIN 0
+  tda1.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enable
+  tda1.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
+  tda1.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+
+  HAL_GPIO_Init(GPIOF, &tda1);      // initialize the pin on GPIOA port with HAL
+  GPIO_InitTypeDef tda2;            // create a config structure
+  tda2.Pin = GPIO_PIN_9;            // this is about PIN 0
+  tda2.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
+  tda2.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
+  tda2.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+
+  HAL_GPIO_Init(GPIOF, &tda2);      // initialize the pin on GPIOA port with HAL
+  GPIO_InitTypeDef tda3;            // create a config structur
+  tda3.Pin = GPIO_PIN_8;            // this is about PIN
+  tda3.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
+  tda3.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
+  tda3.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+
+  HAL_GPIO_Init(GPIOF, &tda3);      // initialize the pin on GPIOA port with HAL
+
+  int delay = 50;
+
+  BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
+
+  struct light_struct{
+	  GPIO_InitTypeDef a;
+	  GPIO_TypeDef* b;
+
+  };
+
+  struct light_struct light0;
+  light0.a = tda0;
+  light0.b = GPIOA;
+
+  struct light_struct light_array1;
+  light_array1.a = tda3;
+  light_array1.b = GPIOF;
+
+  struct light_struct light_array2;
+  light_array2.a = tda1;
+  light_array2.b = GPIOF;
+
+  struct light_struct light_array3;
+  light_array3.a = tda2;
+  light_array3.b = GPIOF;
 
   /* Infinite loop */
   while (1)
   {
-	  BSP_LED_Toggle(LED_GREEN);
-	  HAL_Delay(200);
+
+	  while(BSP_PB_GetState(BUTTON_KEY)){
+		  HAL_GPIO_WritePin(light0.b, light0.a.Pin, GPIO_PIN_SET);   // setting the pin to 1
+		  HAL_GPIO_WritePin(light_array1.b, light_array1.a.Pin, GPIO_PIN_SET);   // setting the pin to 1
+		  HAL_GPIO_WritePin(light_array2.b, light_array2.a.Pin, GPIO_PIN_SET);   // setting the pin to 1
+		  HAL_GPIO_WritePin(light_array3.b, light_array3.a.Pin, GPIO_PIN_SET);   // setting the pin to 1
+
+	  }
+
+	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_SET);   // setting the pin to 1
+	  HAL_Delay(delay);                                      // wait a second
+	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_RESET); // setting the pin to 0
+
+	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_10, GPIO_PIN_SET);   // setting the pin to 1
+	  HAL_Delay(delay);                                      // wait a second
+	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_10, GPIO_PIN_RESET); // setting the pin to 0
+
+	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_8, GPIO_PIN_SET);   // setting the pin to 1
+	  HAL_Delay(delay);                                      // wait a second
+	  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_8, GPIO_PIN_RESET); // setting the pin to 0
+
+	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);   // setting the pin to 1
+	  HAL_Delay(delay);                                      // wait a second
+	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET); // setting the pin to 0
+	  HAL_Delay(delay);                                      // wait a second
+
   }
 }
 
