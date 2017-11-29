@@ -198,18 +198,53 @@ int main(void)
 	  GPIO_TypeDef* b;
   };
 
-  struct light_struct light0 = {tda2, GPIOF};
-  struct light_struct light1 = {tda1, GPIOF};
-  struct light_struct light2 = {tda3, GPIOF};
-  struct light_struct light3 = {tda0, GPIOA};
-  struct light_struct light4 = {tda4, GPIOF};
-  struct light_struct light5 = {tda5, GPIOF};
-  struct light_struct light6 = {tda6, GPIOC};
-  struct light_struct light7 = {tda7, GPIOC};
-  struct light_struct light8 = {tda8, GPIOG};
-  struct light_struct light9 = {tda9, GPIOB};
-  struct light_struct light10 ={tda10, GPIOG};
-  struct light_struct light11 = {tda11, GPIOH};
+  struct light_struct light0;
+  light0.a = tda2;
+  light0.b = GPIOF;
+
+  struct light_struct light1;
+  light1.a = tda1;
+  light1.b = GPIOF;
+
+  struct light_struct light2;
+  light2.a = tda3;
+  light2.b = GPIOF;
+
+  struct light_struct light3;
+  light3.a = tda0;
+  light3.b = GPIOA;
+
+  struct light_struct light4;
+  light4.a = tda4;
+  light4.b = GPIOF;
+
+  struct light_struct light5;
+  light5.a = tda5;
+  light5.b = GPIOF;
+
+  struct light_struct light6;
+  light6.a = tda6;
+  light6.b = GPIOC;
+
+  struct light_struct light7;
+  light7.a = tda7;
+  light7.b = GPIOC;
+
+  struct light_struct light8;
+  light8.a = tda8;
+  light8.b = GPIOG;
+
+  struct light_struct light9;
+  light9.a = tda9;
+  light9.b = GPIOB;
+
+  struct light_struct light10;
+  light10.a = tda10;
+  light10.b = GPIOG;
+
+  struct light_struct light11;
+  light11.a = tda11;
+  light11.b = GPIOH;
 
   struct light_struct light_array[12];
   light_array[0] = light0;
@@ -227,45 +262,12 @@ int main(void)
   light_array[11] = light11;
 
   //	HAL_GPIO_WritePin(light_array[1].b, light_array[1].a.Pin, GPIO_PIN_SET);  // setting the pin to 1
-  int delay = 500;
+  int delay = 30;
 
   while (1)
   {
 
-	  int number = 1;
-
-	  HAL_GPIO_WritePin(light_array[0].b, light_array[0].a.Pin, GPIO_PIN_SET);
-	  HAL_GPIO_WritePin(light_array[1].b, light_array[1].a.Pin, GPIO_PIN_RESET);
-	  HAL_GPIO_WritePin(light_array[2].b, light_array[2].a.Pin, GPIO_PIN_RESET);
-	  HAL_GPIO_WritePin(light_array[3].b, light_array[3].a.Pin, GPIO_PIN_RESET);
-	  HAL_Delay(delay);
-	  HAL_GPIO_WritePin(light_array[0].b, light_array[0].a.Pin, GPIO_PIN_RESET);
-	  HAL_GPIO_WritePin(light_array[1].b, light_array[1].a.Pin, GPIO_PIN_SET);
-	  HAL_GPIO_WritePin(light_array[2].b, light_array[2].a.Pin, GPIO_PIN_RESET);
-	  HAL_GPIO_WritePin(light_array[3].b, light_array[3].a.Pin, GPIO_PIN_RESET);
-	  HAL_Delay(delay);
-	  HAL_GPIO_WritePin(light_array[0].b, light_array[0].a.Pin, GPIO_PIN_SET);
-	  HAL_GPIO_WritePin(light_array[1].b, light_array[1].a.Pin, GPIO_PIN_SET);
-	  HAL_GPIO_WritePin(light_array[2].b, light_array[2].a.Pin, GPIO_PIN_RESET);
-	  HAL_GPIO_WritePin(light_array[3].b, light_array[3].a.Pin, GPIO_PIN_RESET);
-	  HAL_Delay(delay);
-	  HAL_GPIO_WritePin(light_array[0].b, light_array[0].a.Pin, GPIO_PIN_RESET);
-	  HAL_GPIO_WritePin(light_array[1].b, light_array[1].a.Pin, GPIO_PIN_RESET);
-	  HAL_GPIO_WritePin(light_array[2].b, light_array[2].a.Pin, GPIO_PIN_SET);
-	  HAL_GPIO_WritePin(light_array[3].b, light_array[3].a.Pin, GPIO_PIN_RESET);
-	  HAL_Delay(delay);
-
-	  for(int i = 0; i < 12; ++i){
-		  int a = 1;
-		  if(a == 1){
-		  HAL_GPIO_WritePin(light_array[i].b, light_array[i].a.Pin, GPIO_PIN_SET);
-		  } else {
-			  HAL_GPIO_WritePin(light_array[i].b, light_array[i].a.Pin, GPIO_PIN_RESET);
-		  }
-		  HAL_Delay(delay);
-
-	  }
-	 /*if(HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_0) == 0){
+	 if(HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_0) == 0){
 		 HAL_GPIO_WritePin(light_array[6].b, light_array[6].a.Pin, GPIO_PIN_SET);  // setting the pin to 1
 
 	 	 for(int i = 0; i < 12; ++i) {
@@ -293,7 +295,7 @@ int main(void)
 			  HAL_Delay(delay);
 
 		 }
-	 }*/
+	 }
 
   }
 
