@@ -37,7 +37,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include <vector>
+#include <ctime>
+#include <time.h>
+#include <iostream>
 
 /** @addtogroup STM32F7xx_HAL_Examples
  * @{
@@ -191,7 +193,14 @@ int main(void)
   tda12.Speed = GPIO_SPEED_LOW;     // we need a high-speed output
   HAL_GPIO_Init(GPIOI, &tda12);      // initialize the pin on GPIOA port with HAL*/
 
- BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
+  GPIO_InitTypeDef tda13;            // create a config structur
+  tda13.Pin = GPIO_PIN_3;            // this is about PIN
+  tda13.Mode = GPIO_MODE_INPUT;  // Configure as output with push-up-down enabled
+  tda13.Pull = GPIO_PULLUP;       // the push-up-down should work as pulldown
+  tda13.Speed = GPIO_SPEED_LOW;     // we need a high-speed output
+  HAL_GPIO_Init(GPIOI, &tda13);      // initialize the pin on GPIOA port with HAL*/
+
+  BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
 
  struct light_struct{
    GPIO_InitTypeDef a;
@@ -228,31 +237,87 @@ int main(void)
 
  //	HAL_GPIO_WritePin(light_array[1].b, light_array[1].a.Pin, GPIO_PIN_SET);  // setting the pin to 1
 
+ int hour = 17;
+ int minute = 2;
+ int second = 35;
+
  while (1)
  {
+	 if(BSP_PB_GetState(BUTTON_KEY)){
+	 		 hour = 0;
+	 		 minute = 0;
+	 		 second = 0;
+	 }
+
+	 if (HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_0) == 0){
+	 	 	 hour++;
+	 }
+
+	 if (HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_3) == 0){
+	 	 	 	 minute++;
+	  }
+
 	 for(int i = 0; i < 12; i++){
-	 		 HAL_GPIO_WritePin(light_array[i].b, light_array[i].a.Pin, GPIO_PIN_RESET);
-	       }
+		 HAL_GPIO_WritePin(light_array[i].b, light_array[i].a.Pin, GPIO_PIN_RESET);
+      }
 
-	 int input = 4094;
 
-       int number = input;
-       int pos = 0;
+       int sec_pos = 6;
+       int min_pos = 11;
+       int hour_pos = 4;
 
-       	   while(number != 0){
 
-			 if(number % 2 == 0){
-			   HAL_GPIO_WritePin(light_array[pos].b, light_array[pos].a.Pin, GPIO_PIN_RESET);
-			 } else{
-			   HAL_GPIO_WritePin(light_array[pos].b, light_array[pos].a.Pin, GPIO_PIN_SET);
-			 }
+       int bin_second = second;
+       int bin_minute = minute;
+       int bin_hour = hour;
 
-			 HAL_Delay(1);
-			 number /= 2;
-			 pos++;
-		   }
+       while(bin_hour != 0){
 
-       HAL_Delay(1);
+              			 if(bin_hour % 2 == 0){
+              			   HAL_GPIO_WritePin(light_array[hour_pos].b, light_array[hour_pos].a.Pin, GPIO_PIN_RESET);
+              			 } else{
+              			   HAL_GPIO_WritePin(light_array[hour_pos].b, light_array[hour_pos].a.Pin, GPIO_PIN_SET);
+              			 }
+
+              			bin_hour /= 2;
+              			hour_pos--;
+              		   }
+
+       while(bin_minute != 0){
+
+       			 if(bin_minute % 2 == 0){
+       			   HAL_GPIO_WritePin(light_array[min_pos].b, light_array[min_pos].a.Pin, GPIO_PIN_RESET);
+       			 } else{
+       			   HAL_GPIO_WritePin(light_array[min_pos].b, light_array[min_pos].a.Pin, GPIO_PIN_SET);
+       			 }
+
+       			bin_minute /= 2;
+       			 min_pos--;
+       		   }
+
+
+       	   if(second % 2 == 0){
+       		   HAL_GPIO_WritePin(light_array[5].b, light_array[5].a.Pin, GPIO_PIN_SET);
+       	   }else{
+       		   HAL_GPIO_WritePin(light_array[5].b, light_array[5].a.Pin, GPIO_PIN_RESET);
+       	   }
+       	   HAL_Delay(1000);
+
+       second++;
+
+       if(second == 60){
+    	   second = 0;
+           minute++;
+       }
+
+       if(minute == 60){
+          minute = 0;
+          hour++;
+       }
+
+       if(hour == 24){
+          hour = 0;
+        }
 
 
 
