@@ -169,9 +169,8 @@ RNG_HandleTypeDef rndCfg;
 rndCfg.Instance = RNG;
 HAL_RNG_Init(&rndCfg);
 
-SystemInit();
 
-int a = RCC_GetClocksFreq();
+
 
   while (1)
   {
@@ -184,6 +183,8 @@ int a = RCC_GetClocksFreq();
 	  printf("\n------------------WELCOME------------------\r\n");
 	  printf("**********in STATIC reaction game**********\r\n\n");
 	  printf("%lu", randomNumber);
+
+
 
 	 /* while(randomNumber != 0){
 
