@@ -69,7 +69,6 @@ static void MPU_Config(void);
 static void CPU_CACHE_Enable(void);
 
 /* Private functions ---------------------------------------------------------*/
-
 /**
   * @brief  Main program
   * @param  None
@@ -100,57 +99,6 @@ int main(void)
   /* Configure the System clock to have a frequency of 216 MHz */
   SystemClock_Config();
 
-  //Configure LEDs
-  /*//adding leds
-  __HAL_RCC_GPIOA_CLK_ENABLE();    // we need to enable the GPIOA port's clock first
-  __HAL_RCC_GPIOF_CLK_ENABLE();    // we need to enable the GPIOF port's clock first
-
-  GPIO_InitTypeDef tda0;            // create a config structure
-  tda0.Pin = GPIO_PIN_0;            // this is about PIN 0
-  tda0.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
-  tda0.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
-  tda0.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
-  HAL_GPIO_Init(GPIOA, &tda0);      // initialize the pin on GPIOA port with HAL
-
-  GPIO_InitTypeDef tda1;            // create a config structure
-  tda1.Pin = GPIO_PIN_10;            // this is about PIN 0
-  tda1.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enable
-  tda1.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
-  tda1.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
-  HAL_GPIO_Init(GPIOF, &tda1);      // initialize the pin on GPIOA port with HAL
-
-  GPIO_InitTypeDef tda2;            // create a config structure
-  tda2.Pin = GPIO_PIN_9;            // this is about PIN 0
-  tda2.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
-  tda2.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
-  tda2.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
-  HAL_GPIO_Init(GPIOF, &tda2);      // initialize the pin on GPIOA port with HAL
-
-  GPIO_InitTypeDef tda3;            // create a config structur
-  tda3.Pin = GPIO_PIN_8;            // this is about PIN
-  tda3.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
-  tda3.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
-  tda3.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
-  HAL_GPIO_Init(GPIOF, &tda3);      // initialize the pin on GPIOA port with HAL
-
-  struct light_struct{
-     GPIO_InitTypeDef a;
-     GPIO_TypeDef* b;
-   };
-
-   struct light_struct light0 = {tda2, GPIOF}; // plaing Port and PIN # in structs
-   struct light_struct light1 = {tda1, GPIOF};
-   struct light_struct light2 = {tda3, GPIOF};
-   struct light_struct light3 = {tda0, GPIOA};
-
-   struct light_struct light_array[4]= { // filling struct in array
-    light0,
-    light1,
-    light2,
-    light3};*/
-
-  /* Add your application code here
-     */
   BSP_LED_Init(LED_GREEN);
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
 
@@ -163,30 +111,56 @@ int main(void)
 
   BSP_COM_Init(COM1, &uart_handle);
 
-
+void MyDelayLight(__IO uint32_t Delay)
+{
+uint32_t tickstart = 0;
+tickstart = HAL_GetTick();
+	while((HAL_GetTick() - tickstart) < Delay) {
+	  if(BSP_PB_GetState(BUTTON_KEY) != 0){
+		  BSP_LED_Off(LED_GREEN);
+		  return;
+	  }
+	}
+}
 
 RNG_HandleTypeDef rndCfg;
 rndCfg.Instance = RNG;
 HAL_RNG_Init(&rndCfg);
 
 
-
+printf("\n------------------WELCOME------------------\r\n");
+printf("**********in STATIC reaction game**********\r\n\n");
 
   while (1)
   {
-	  uint32_t randomNumber = HAL_RNG_GetRandomNumber(&rndCfg) % 10 + 1;
+  	  uint32_t randomNumber = HAL_RNG_GetRandomNumber(&rndCfg) % 5 + 1;
+  	  uint32_t gamestart = 0;
 
-      int hour_pos = 3;
+	  while(BSP_PB_GetState(BUTTON_KEY) == 0){
+		  BSP_LED_On(LED_GREEN);
+		  MyDelayLight(200);
 
+		  BSP_LED_Off(LED_GREEN);
+		  MyDelayLight(200);
+	  }
+	  while(BSP_PB_GetState(BUTTON_KEY)){
+	  }
+	  printf("The game has started\r\n");
+	  MyDelayLight(2 * 1000);
+	  BSP_LED_On(LED_GREEN);
+	  HAL_Delay(100);
+	  BSP_LED_Off(LED_GREEN);
+	  gamestart = HAL_GetTick();
+	  while(BSP_PB_GetState(BUTTON_KEY) ==0){
+	  }
 
-	  HAL_Delay(1000);
-	  printf("\n------------------WELCOME------------------\r\n");
-	  printf("**********in STATIC reaction game**********\r\n\n");
-	  printf("%lu", randomNumber);
+	  printf("Time: %lu\r\n", HAL_GetTick() - gamestart);
 
+	  printf("%lu\r\n", randomNumber);
 
-
-	 /* while(randomNumber != 0){
+	 /*
+	  *       int hour_pos = 3;
+	  * while(randomNumber != 0){
 
 	  		   if(randomNumber % 2 == 0){
 	  			   HAL_GPIO_WritePin(light_array[hour_pos].b, light_array[hour_pos].a.Pin, GPIO_PIN_RESET);
