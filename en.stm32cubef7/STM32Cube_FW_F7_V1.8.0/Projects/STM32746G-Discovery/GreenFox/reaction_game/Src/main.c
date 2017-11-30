@@ -111,16 +111,17 @@ int main(void)
 
   BSP_COM_Init(COM1, &uart_handle);
 
-void MyDelayLight(__IO uint32_t Delay)
+int MyDelayLight(__IO uint32_t Delay)
 {
 uint32_t tickstart = 0;
 tickstart = HAL_GetTick();
 	while((HAL_GetTick() - tickstart) < Delay) {
 	  if(BSP_PB_GetState(BUTTON_KEY) != 0){
 		  BSP_LED_Off(LED_GREEN);
-		  return;
+		  return 0;
 	  }
 	}
+	return 1;
 }
 
 RNG_HandleTypeDef rndCfg;
@@ -130,13 +131,19 @@ HAL_RNG_Init(&rndCfg);
 
 printf("\n------------------WELCOME------------------\r\n");
 printf("**********in STATIC reaction game**********\r\n\n");
+printf("Press button to start...\r\n\n");
 
-  while (1)
-  {
-  	  uint32_t randomNumber = HAL_RNG_GetRandomNumber(&rndCfg) % 5 + 1;
-  	  uint32_t gamestart = 0;
+uint32_t game_count = 0;
+uint32_t time_sum = 0;
 
-	  while(BSP_PB_GetState(BUTTON_KEY) == 0){
+
+while (1) {
+
+	 game_count++;
+
+  	 uint32_t randomNumber = HAL_RNG_GetRandomNumber(&rndCfg) % 5 + 1;
+
+	 while(BSP_PB_GetState(BUTTON_KEY) == 0){
 		  BSP_LED_On(LED_GREEN);
 		  MyDelayLight(200);
 
@@ -145,32 +152,27 @@ printf("**********in STATIC reaction game**********\r\n\n");
 	  }
 	  while(BSP_PB_GetState(BUTTON_KEY)){
 	  }
-	  printf("The game has started\r\n");
-	  MyDelayLight(2 * 1000);
+	  printf("The game has started!\r\n");
+	  if(MyDelayLight(randomNumber * 1000)){
+
 	  BSP_LED_On(LED_GREEN);
-	  HAL_Delay(100);
+	  HAL_Delay(50);
 	  BSP_LED_Off(LED_GREEN);
-	  gamestart = HAL_GetTick();
+	  uint32_t gamestart = HAL_GetTick();
+
 	  while(BSP_PB_GetState(BUTTON_KEY) ==0){
 	  }
+	  uint32_t time = HAL_GetTick() - gamestart;
+	  time_sum += time;
+	  printf("Great job!, Your time was: %lu ms", time);
+	  printf("\tYour avarage reaction time is: %lu \r\n\n",time_sum/game_count);
 
-	  printf("Time: %lu\r\n", HAL_GetTick() - gamestart);
-
-	  printf("%lu\r\n", randomNumber);
-
-	 /*
-	  *       int hour_pos = 3;
-	  * while(randomNumber != 0){
-
-	  		   if(randomNumber % 2 == 0){
-	  			   HAL_GPIO_WritePin(light_array[hour_pos].b, light_array[hour_pos].a.Pin, GPIO_PIN_RESET);
-	  		   } else{
-	  			   HAL_GPIO_WritePin(light_array[hour_pos].b, light_array[hour_pos].a.Pin, GPIO_PIN_SET);
-	  		   }
-
-	  		 randomNumber /= 2;
-	  		   hour_pos--;
-	  	   }*/
+	  } else{
+		  printf("Too early bro...\r\n\n");
+	  }
+	  while(BSP_PB_GetState(BUTTON_KEY)){
+	  }
+	  printf("For new game, hit button again.\r\n--------------------------------\r\n");
 
   }
 }
