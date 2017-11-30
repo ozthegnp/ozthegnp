@@ -152,62 +152,62 @@ int main(void)
  HAL_GPIO_Init(GPIOC, &tda6);      // initialize the pin on GPIOA port with HAL
 
  GPIO_InitTypeDef tda7;            // create a config structur
-   tda7.Pin = GPIO_PIN_6;            // this is about PIN
-   tda7.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
-   tda7.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
-   tda7.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
-   HAL_GPIO_Init(GPIOC, &tda7);      // initialize the pin on GPIOA port with HAL
+ tda7.Pin = GPIO_PIN_6;            // this is about PIN
+ tda7.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
+ tda7.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
+ tda7.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+ HAL_GPIO_Init(GPIOC, &tda7);      // initialize the pin on GPIOA port with HAL
 
-  GPIO_InitTypeDef tda8;            // create a config structur
-    tda8.Pin = GPIO_PIN_6;            // this is about PIN
-    tda8.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
-    tda8.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
-    tda8.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
-       HAL_GPIO_Init(GPIOG, &tda8);      // initialize the pin on GPIOA port with HAL
+ GPIO_InitTypeDef tda8;            // create a config structur
+ tda8.Pin = GPIO_PIN_6;            // this is about PIN
+ tda8.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
+ tda8.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
+ tda8.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+ HAL_GPIO_Init(GPIOG, &tda8);      // initialize the pin on GPIOA port with HAL
 
-  GPIO_InitTypeDef tda9;            // create a config structur
-    tda9.Pin = GPIO_PIN_4;            // this is about PIN
-    tda9.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
-    tda9.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
-    tda9.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
-   HAL_GPIO_Init(GPIOB, &tda9);      // initialize the pin on GPIOA port with HAL
+ GPIO_InitTypeDef tda9;            // create a config structur
+ tda9.Pin = GPIO_PIN_4;            // this is about PIN
+ tda9.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
+ tda9.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
+ tda9.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+ HAL_GPIO_Init(GPIOB, &tda9);      // initialize the pin on GPIOA port with HAL
 
-  GPIO_InitTypeDef tda10;            // create a config structur
-  tda10.Pin = GPIO_PIN_7;            // this is about PIN
-  tda10.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
-  tda10.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
-  tda10.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
-  HAL_GPIO_Init(GPIOG, &tda10);      // initialize the pin on GPIOA port with HAL
+ GPIO_InitTypeDef tda10;            // create a config structur
+ tda10.Pin = GPIO_PIN_7;            // this is about PIN
+ tda10.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
+ tda10.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
+ tda10.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+ HAL_GPIO_Init(GPIOG, &tda10);      // initialize the pin on GPIOA port with HAL
 
-  GPIO_InitTypeDef tda11;            // create a config structur
-  tda11.Pin = GPIO_PIN_6;            // this is about PIN
-  tda11.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
-  tda11.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
-  tda11.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
-  HAL_GPIO_Init(GPIOH, &tda11);      // initialize the pin on GPIOA port with HAL
+ GPIO_InitTypeDef tda11;            // create a config structur
+ tda11.Pin = GPIO_PIN_6;            // this is about PIN
+ tda11.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
+ tda11.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
+ tda11.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+ HAL_GPIO_Init(GPIOH, &tda11);      // initialize the pin on GPIOA port with HAL
 
-  GPIO_InitTypeDef tda12;            // create a config structur
-  tda12.Pin = GPIO_PIN_0;            // this is about PIN
-  tda12.Mode = GPIO_MODE_INPUT;  // Configure as output with push-up-down enabled
-  tda12.Pull = GPIO_PULLUP;       // the push-up-down should work as pulldown
-  tda12.Speed = GPIO_SPEED_LOW;     // we need a high-speed output
-  HAL_GPIO_Init(GPIOI, &tda12);      // initialize the pin on GPIOA port with HAL*/
+ GPIO_InitTypeDef tda12;            // create a config structur
+ tda12.Pin = GPIO_PIN_0;            // this is about PIN
+ tda12.Mode = GPIO_MODE_INPUT;  // Configure as output with push-up-down enabled
+ tda12.Pull = GPIO_PULLUP;       // the push-up-down should work as pulldown
+ tda12.Speed = GPIO_SPEED_LOW;     // we need a high-speed output
+ HAL_GPIO_Init(GPIOI, &tda12);      // initialize the pin on GPIOA port with HAL*/
 
-  GPIO_InitTypeDef tda13;            // create a config structur
-  tda13.Pin = GPIO_PIN_3;            // this is about PIN
-  tda13.Mode = GPIO_MODE_INPUT;  // Configure as output with push-up-down enabled
-  tda13.Pull = GPIO_PULLUP;       // the push-up-down should work as pulldown
-  tda13.Speed = GPIO_SPEED_LOW;     // we need a high-speed output
-  HAL_GPIO_Init(GPIOI, &tda13);      // initialize the pin on GPIOA port with HAL*/
+ GPIO_InitTypeDef tda13;            // create a config structur
+ tda13.Pin = GPIO_PIN_3;            // this is about PIN
+ tda13.Mode = GPIO_MODE_INPUT;  // Configure as output with push-up-down enabled
+ tda13.Pull = GPIO_PULLUP;       // the push-up-down should work as pulldown
+ tda13.Speed = GPIO_SPEED_LOW;     // we need a high-speed output
+ HAL_GPIO_Init(GPIOI, &tda13);      // initialize the pin on GPIOA port with HAL*/
 
-  BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
+ BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
 
  struct light_struct{
    GPIO_InitTypeDef a;
    GPIO_TypeDef* b;
  };
 
- struct light_struct light0 = {tda2, GPIOF};
+ struct light_struct light0 = {tda2, GPIOF}; // plaing Port and PIN # in structs
  struct light_struct light1 = {tda1, GPIOF};
  struct light_struct light2 = {tda3, GPIOF};
  struct light_struct light3 = {tda0, GPIOA};
@@ -220,23 +220,22 @@ int main(void)
  struct light_struct light10 ={tda10, GPIOG};
  struct light_struct light11 = {tda11, GPIOH};
 
- struct light_struct light_array[12];
- light_array[0] = light0;
- light_array[1] = light1;
- light_array[2] = light2;
- light_array[3] = light3;
- light_array[4] = light4;
- light_array[5] = light5;
- light_array[6] = light6;
- light_array[7] = light7;
- light_array[8] = light8;
- light_array[9] = light9;
- light_array[9] = light9;
- light_array[10] = light10;
- light_array[11] = light11;
+ struct light_struct light_array[12]= { // filling struct in array
+	light0,
+	light1,
+	light2,
+	light3,
+	light4,
+	light5,
+	light6,
+	light7,
+	light8,
+	light9,
+	light10,
+	light11 };
 
 
- int hour = 17;
+ int hour = 17; // initializing time randomly
  int minute = 2;
  int second = 35;
 
@@ -272,36 +271,36 @@ int main(void)
 
        while(bin_hour != 0){
 
-              			 if(bin_hour % 2 == 0){
-              			   HAL_GPIO_WritePin(light_array[hour_pos].b, light_array[hour_pos].a.Pin, GPIO_PIN_RESET);
-              			 } else{
-              			   HAL_GPIO_WritePin(light_array[hour_pos].b, light_array[hour_pos].a.Pin, GPIO_PIN_SET);
-              			 }
+		   if(bin_hour % 2 == 0){
+			   HAL_GPIO_WritePin(light_array[hour_pos].b, light_array[hour_pos].a.Pin, GPIO_PIN_RESET);
+		   } else{
+			   HAL_GPIO_WritePin(light_array[hour_pos].b, light_array[hour_pos].a.Pin, GPIO_PIN_SET);
+		   }
 
-              			bin_hour /= 2;
-              			hour_pos--;
-              		   }
+		   bin_hour /= 2;
+		   hour_pos--;
+	   }
 
        while(bin_minute != 0){
 
-       			 if(bin_minute % 2 == 0){
-       			   HAL_GPIO_WritePin(light_array[min_pos].b, light_array[min_pos].a.Pin, GPIO_PIN_RESET);
-       			 } else{
-       			   HAL_GPIO_WritePin(light_array[min_pos].b, light_array[min_pos].a.Pin, GPIO_PIN_SET);
-       			 }
+		 if(bin_minute % 2 == 0){
+		   HAL_GPIO_WritePin(light_array[min_pos].b, light_array[min_pos].a.Pin, GPIO_PIN_RESET);
+		 } else{
+		   HAL_GPIO_WritePin(light_array[min_pos].b, light_array[min_pos].a.Pin, GPIO_PIN_SET);
+		 }
 
-       			bin_minute /= 2;
-       			 min_pos--;
-       		   }
+		 bin_minute /= 2;
+		 min_pos--;
+	   }
 
 
-       	   if(second % 2 == 0){
-       		   HAL_GPIO_WritePin(light_array[5].b, light_array[5].a.Pin, GPIO_PIN_SET);
-       	   }else{
-       		   HAL_GPIO_WritePin(light_array[5].b, light_array[5].a.Pin, GPIO_PIN_RESET);
-       	   }
-       	   HAL_Delay(1000);
+	   if(second % 2 == 0){
+		   HAL_GPIO_WritePin(light_array[5].b, light_array[5].a.Pin, GPIO_PIN_SET);
+	   }else{
+		   HAL_GPIO_WritePin(light_array[5].b, light_array[5].a.Pin, GPIO_PIN_RESET);
+	   }
 
+	   HAL_Delay(1000);
        second++;
 
        if(second == 60){
@@ -317,10 +316,6 @@ int main(void)
        if(hour == 24){
           hour = 0;
         }
-
-
-
-
 
  /*int delay = 100;
   if(HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_0) == 0){
