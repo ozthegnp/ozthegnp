@@ -260,12 +260,9 @@ int main(void)
       }
 
 
-       int sec_pos = 6;
        int min_pos = 11;
-       int hour_pos = 4;
+       int hour_pos = 11;
 
-
-       int bin_second = second;
        int bin_minute = minute;
        int bin_hour = hour;
 
