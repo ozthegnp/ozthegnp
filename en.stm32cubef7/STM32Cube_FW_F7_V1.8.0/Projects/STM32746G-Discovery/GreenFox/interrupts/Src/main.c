@@ -48,6 +48,11 @@
  */
 
 /* Private typedef -----------------------------------------------------------*/
+TIM_HandleTypeDef    TimHandle;           //the timer's config structure
+TIM_OC_InitTypeDef sConfig;
+GPIO_InitTypeDef led;
+GPIO_InitTypeDef tda0;
+
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -56,19 +61,64 @@ UART_HandleTypeDef uart_handle;
 volatile uint32_t timIntPeriod;
 
 /* Private function prototypes -----------------------------------------------*/
+void TIM1_UP_TIM10_IRQHandler() {
+	HAL_TIM_IRQHandler(&TimHandle);
+}
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
+}
+
 void My_led_init(GPIO_TypeDef *port, uint32_t pin_number) {
 
-	__HAL_RCC_GPIOA_CLK_ENABLE()
-	;    // we need to enable the GPIOA port's clock first
 
-	GPIO_InitTypeDef led;            // create a config structure
 	led.Pin = pin_number;            // this is about PIN 0
 	led.Mode = GPIO_MODE_OUTPUT_PP; // Configure as output with push-up-down enabled
-	led.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
+	led.Pull = GPIO_PULLUP;        // the push-up-down should work as pulldown
 	led.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+	//led.Alternate = GPIO_AF1_TIM2;
 
 	HAL_GPIO_Init(port, &led);      // initialize the pin on GPIOA port with HAL
-	HAL_GPIO_WritePin(port, pin_number, GPIO_PIN_RESET);
+	//HAL_GPIO_WritePin(port, pin_number, GPIO_PIN_RESET);
+}
+
+void My_PWM_led_init(GPIO_TypeDef *port, uint32_t pin_number) {
+
+
+	led.Pin = pin_number;            // this is about PIN 0
+	led.Mode = GPIO_MODE_AF_PP; // Configure as output with push-up-down enabled
+	led.Pull = GPIO_NOPULL;        // the push-up-down should work as pulldown
+	led.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+	led.Alternate = GPIO_AF1_TIM1;
+
+	HAL_GPIO_Init(port, &led);     // initialize the pin on GPIOA port with HAL
+}
+
+void My_button_init(GPIO_TypeDef *port, uint32_t pin_number) {
+
+		GPIO_InitTypeDef conf;                // create the configuration struct
+		conf.Pin = pin_number;               // the pin is the 11
+
+		/* We know from the board's datasheet that a resistor is already installed externally for this button (so it's not floating), we don't want to use the internal pull feature */
+		conf.Pull = GPIO_NOPULL;
+		conf.Speed = GPIO_SPEED_FAST;         // port speed to fast
+
+		/* Here is the trick: our mode is interrupt on rising edge */
+		conf.Mode = GPIO_MODE_IT_RISING;
+
+		HAL_GPIO_Init(port, &conf);          // call the HAL init
+
+}
+
+void My_timer_init(/*GPIO_TypeDef *port, uint32_t pin_number*/) {
+
+	  TimHandle.Instance               = TIM1;
+	  TimHandle.Init.Period            = 500;
+	  TimHandle.Init.Prescaler         = 54000;
+	  TimHandle.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
+	  TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
+
+	  HAL_TIM_Base_Init(&TimHandle);
+	  HAL_TIM_Base_Start_IT(&TimHandle);
 }
 
 #ifdef __GNUC__
@@ -128,39 +178,38 @@ int main(void) {
 
 	BSP_COM_Init(COM1, &uart_handle);
 
+	__HAL_RCC_GPIOF_CLK_ENABLE(); 	 // enable the GPIOA  clock
+	__HAL_RCC_GPIOA_CLK_ENABLE(); 	 // enable the GPIOA  clock
+
+	__HAL_RCC_GPIOI_CLK_ENABLE();  	 // enable the GPIOI clock
+	__HAL_RCC_TIM1_CLK_ENABLE();  	 // we need to enable the TIM1
+
+
 	My_led_init(GPIOA, GPIO_PIN_0);
+	//My_button_init(GPIOI, GPIO_PIN_11);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
+	My_timer_init();
 
-	__HAL_RCC_GPIOI_CLK_ENABLE();         // enable the GPIOI clock
 
-	GPIO_InitTypeDef conf;                // create the configuration struct
-	conf.Pin = GPIO_PIN_11;               // the pin is the 11
-
-	/* We know from the board's datasheet that a resistor is already installed externally for this button (so it's not floating), we don't want to use the internal pull feature */
-	conf.Pull = GPIO_NOPULL;
-	conf.Speed = GPIO_SPEED_FAST;         // port speed to fast
-
-	/* Here is the trick: our mode is interrupt on rising edge */
-	conf.Mode = GPIO_MODE_IT_RISING;
-
-	HAL_GPIO_Init(GPIOI, &conf);          // call the HAL init
-	HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0x0F, 0x00);
-	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+	HAL_NVIC_SetPriority(TIM1_UP_TIM10_IRQn, 0x0F, 0x00);
+	HAL_NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
 
 	printf("\n-----------------WELCOME-----------------\r\n");
 	printf("**********in STATIC interrupts WS**********\r\n\n");
 
 	while (1) {
 
+		if(TIM1->CNT == 0){
 
+			printf("HELLO\r\n", TIM1->CNT );
+
+		}
 
 	}
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
-		HAL_Delay(1000);
-		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
-
+	  sConfig.Pulse = 1000;
 }
 
 /**
@@ -226,7 +275,7 @@ static void SystemClock_Config(void) {
 	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
 	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
 	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV8;
 	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_7) != HAL_OK) {
 		Error_Handler();
 	}
