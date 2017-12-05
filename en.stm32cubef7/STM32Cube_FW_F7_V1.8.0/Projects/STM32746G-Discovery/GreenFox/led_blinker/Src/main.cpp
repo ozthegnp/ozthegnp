@@ -239,7 +239,7 @@ int main(void)
  int minute = 4;
  int second = 00;
 
- while (1)
+ while (1) 	
  {
 	 if(BSP_PB_GetState(BUTTON_KEY)){
 	 		 hour = 0;
@@ -304,12 +304,10 @@ int main(void)
     	   second = 0;
            minute++;
        }
-
        if(minute == 60){
           minute = 0;
           hour++;
        }
-
        if(hour == 24){
           hour = 0;
         }
