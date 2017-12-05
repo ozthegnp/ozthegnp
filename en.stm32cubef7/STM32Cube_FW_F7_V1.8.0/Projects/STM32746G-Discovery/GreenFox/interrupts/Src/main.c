@@ -56,16 +56,19 @@ UART_HandleTypeDef uart_handle;
 volatile uint32_t timIntPeriod;
 
 /* Private function prototypes -----------------------------------------------*/
-void My_led_init(GPIO_TypeDef *port ,uint32_t pin_number){
+void My_led_init(GPIO_TypeDef *port, uint32_t pin_number) {
 
-	__HAL_RCC_GPIOA_CLK_ENABLE();    // we need to enable the GPIOA port's clock first
+	__HAL_RCC_GPIOA_CLK_ENABLE()
+	;    // we need to enable the GPIOA port's clock first
 
 	GPIO_InitTypeDef led;            // create a config structure
-	 led.Pin = pin_number;            // this is about PIN 0
-	 led.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
-	 led.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
-	 led.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
-	 HAL_GPIO_Init(port, &led);      // initialize the pin on GPIOA port with HAL
+	led.Pin = pin_number;            // this is about PIN 0
+	led.Mode = GPIO_MODE_OUTPUT_PP; // Configure as output with push-up-down enabled
+	led.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
+	led.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+
+	HAL_GPIO_Init(port, &led);      // initialize the pin on GPIOA port with HAL
+	HAL_GPIO_WritePin(port, pin_number, GPIO_PIN_RESET);
 }
 
 #ifdef __GNUC__
@@ -112,8 +115,6 @@ int main(void) {
 	/* Configure the System clock to have a frequency of 216 MHz */
 	SystemClock_Config();
 
-	BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_EXTI);
-
 	/* Add your application code here
 	 */
 	BSP_LED_Init(LED_GREEN);
@@ -129,11 +130,37 @@ int main(void) {
 
 	My_led_init(GPIOA, GPIO_PIN_0);
 
+	__HAL_RCC_GPIOI_CLK_ENABLE();         // enable the GPIOI clock
+
+	GPIO_InitTypeDef conf;                // create the configuration struct
+	conf.Pin = GPIO_PIN_11;               // the pin is the 11
+
+	/* We know from the board's datasheet that a resistor is already installed externally for this button (so it's not floating), we don't want to use the internal pull feature */
+	conf.Pull = GPIO_NOPULL;
+	conf.Speed = GPIO_SPEED_FAST;         // port speed to fast
+
+	/* Here is the trick: our mode is interrupt on rising edge */
+	conf.Mode = GPIO_MODE_IT_RISING;
+
+	HAL_GPIO_Init(GPIOI, &conf);          // call the HAL init
+	HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0x0F, 0x00);
+	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
 	printf("\n-----------------WELCOME-----------------\r\n");
 	printf("**********in STATIC interrupts WS**********\r\n\n");
 
 	while (1) {
+
+
+
 	}
+}
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
+		HAL_Delay(1000);
+		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
+
 }
 
 /**
