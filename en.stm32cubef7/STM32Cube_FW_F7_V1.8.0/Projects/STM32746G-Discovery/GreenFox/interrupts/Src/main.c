@@ -223,7 +223,7 @@ int main(void) {
 			if(TIM2->CCR1 >= 50){
 				HAL_Delay(5);
 			}else{
-				HAL_Delay(20);
+				HAL_Delay(10);
 			}
 		}
 
@@ -242,8 +242,8 @@ void EXTI15_10_IRQHandler(){
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-	if(TIM2->CCR1 <= 1646){
-	TIM2->CCR1 += 50;
+	if(TIM2->CCR1 <= 1800){
+	TIM2->CCR1 += 100;
 	}
 }
 
