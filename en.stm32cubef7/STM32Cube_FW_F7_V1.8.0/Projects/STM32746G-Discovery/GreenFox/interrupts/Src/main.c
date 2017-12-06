@@ -122,13 +122,13 @@ void My_timer_init(/*GPIO_TypeDef *port, uint32_t pin_number*/) {
 void My_PWM_timer_init(/*GPIO_TypeDef *port, uint32_t pin_number*/) {
 
 	  TimHandle.Instance               = TIM2;
-	  TimHandle.Init.Period            = 3500;
+	  TimHandle.Init.Period            = 1646;
 	  TimHandle.Init.Prescaler         = 0x00FF;
 	  TimHandle.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
 	  TimHandle.Init.CounterMode       = TIM_COUNTERMODE_DOWN;
 
 	  sConfig.OCMode = TIM_OCMODE_PWM1;
-	  sConfig.Pulse = 100;
+	  sConfig.Pulse = 1;
 
 	  HAL_TIM_PWM_Init(&TimHandle);
 	  HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_1);
@@ -204,7 +204,10 @@ int main(void) {
 
 	My_PWM_led_init(GPIOA, GPIO_PIN_0);
 	My_PWM_timer_init();
+	My_button_init(GPIOI, GPIO_PIN_11);
 
+	HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0x0F, 0x00);
+	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
 	HAL_NVIC_SetPriority(TIM2_IRQn, 0x0F, 0x00);
 	HAL_NVIC_EnableIRQ(TIM2_IRQn);
@@ -212,16 +215,16 @@ int main(void) {
 	printf("\n-----------------WELCOME-----------------\r\n");
 	printf("**********in STATIC interrupts WS**********\r\n\n");
 
-	int dirUp = 1;
 		while (1) {
-			if (TIM2->CCR1 == 3500) {
-				dirUp = 0;
+			if (TIM2->CCR1 >= 1) {
+				(TIM2->CCR1 -= 1);
 			}
-			if (TIM2->CCR1 == 500) {
-				dirUp = 1;
+
+			if(TIM2->CCR1 >= 50){
+				HAL_Delay(5);
+			}else{
+				HAL_Delay(20);
 			}
-			TIM2->CCR1 = dirUp ? (TIM2->CCR1 + 1) : (TIM2->CCR1 - 1);
-			HAL_Delay(1);
 		}
 
 }
@@ -231,13 +234,18 @@ void TIM2_IRQHandler() {
 }
 
 void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim){
-	/*repetition--;
-		if (repetition == 0) {
-			HAL_TIM_PWM_Stop_IT(&TimHandle, TIM_CHANNEL_1);
-		}
-		printf("PWM pulse finished\r\n");*/
-	}
 
+}
+
+void EXTI15_10_IRQHandler(){
+	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_11);
+}
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+	if(TIM2->CCR1 <= 1646){
+	TIM2->CCR1 += 50;
+	}
+}
 
 /**
  * @brief  Retargets the C library printf function to the USART.
