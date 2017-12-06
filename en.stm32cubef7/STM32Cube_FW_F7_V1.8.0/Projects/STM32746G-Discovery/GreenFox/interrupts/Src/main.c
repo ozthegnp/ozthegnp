@@ -53,20 +53,19 @@ TIM_OC_InitTypeDef sConfig;
 GPIO_InitTypeDef led;
 GPIO_InitTypeDef tda0;
 
+
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef uart_handle;
 
 volatile uint32_t timIntPeriod;
+volatile int repetition = 5;
+
 
 /* Private function prototypes -----------------------------------------------*/
-void TIM1_UP_TIM10_IRQHandler() {
-	HAL_TIM_IRQHandler(&TimHandle);
-}
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
-}
+void TIM2_IRQHandler();
+void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim);
 
 void My_led_init(GPIO_TypeDef *port, uint32_t pin_number) {
 
@@ -83,12 +82,11 @@ void My_led_init(GPIO_TypeDef *port, uint32_t pin_number) {
 
 void My_PWM_led_init(GPIO_TypeDef *port, uint32_t pin_number) {
 
-
 	led.Pin = pin_number;            // this is about PIN 0
 	led.Mode = GPIO_MODE_AF_PP; // Configure as output with push-up-down enabled
 	led.Pull = GPIO_NOPULL;        // the push-up-down should work as pulldown
 	led.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
-	led.Alternate = GPIO_AF1_TIM1;
+	led.Alternate = GPIO_AF1_TIM2;
 
 	HAL_GPIO_Init(port, &led);     // initialize the pin on GPIOA port with HAL
 }
@@ -112,13 +110,29 @@ void My_button_init(GPIO_TypeDef *port, uint32_t pin_number) {
 void My_timer_init(/*GPIO_TypeDef *port, uint32_t pin_number*/) {
 
 	  TimHandle.Instance               = TIM1;
-	  TimHandle.Init.Period            = 500;
-	  TimHandle.Init.Prescaler         = 54000;
+	  TimHandle.Init.Period            = 1646;
+	  TimHandle.Init.Prescaler         = 0xFFFF;
 	  TimHandle.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
 	  TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
 
 	  HAL_TIM_Base_Init(&TimHandle);
 	  HAL_TIM_Base_Start_IT(&TimHandle);
+}
+
+void My_PWM_timer_init(/*GPIO_TypeDef *port, uint32_t pin_number*/) {
+
+	  TimHandle.Instance               = TIM2;
+	  TimHandle.Init.Period            = 3500;
+	  TimHandle.Init.Prescaler         = 0x00FF;
+	  TimHandle.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
+	  TimHandle.Init.CounterMode       = TIM_COUNTERMODE_DOWN;
+
+	  sConfig.OCMode = TIM_OCMODE_PWM1;
+	  sConfig.Pulse = 100;
+
+	  HAL_TIM_PWM_Init(&TimHandle);
+	  HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_1);
+	  HAL_TIM_PWM_Start_IT(&TimHandle, TIM_CHANNEL_1);
 }
 
 #ifdef __GNUC__
@@ -168,49 +182,62 @@ int main(void) {
 	/* Add your application code here
 	 */
 	BSP_LED_Init(LED_GREEN);
+	/**
+		 * Configure UART
+		 */
 
 	uart_handle.Init.BaudRate = 115200;
-	uart_handle.Init.WordLength = UART_WORDLENGTH_8B;
-	uart_handle.Init.StopBits = UART_STOPBITS_1;
-	uart_handle.Init.Parity = UART_PARITY_NONE;
-	uart_handle.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-	uart_handle.Init.Mode = UART_MODE_TX_RX;
+		uart_handle.Init.WordLength = UART_WORDLENGTH_8B;
+		uart_handle.Init.StopBits = UART_STOPBITS_1;
+		uart_handle.Init.Parity = UART_PARITY_NONE;
+		uart_handle.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+		uart_handle.Init.Mode = UART_MODE_TX_RX;
 
-	BSP_COM_Init(COM1, &uart_handle);
+		BSP_COM_Init(COM1, &uart_handle);
+
 
 	__HAL_RCC_GPIOF_CLK_ENABLE(); 	 // enable the GPIOA  clock
 	__HAL_RCC_GPIOA_CLK_ENABLE(); 	 // enable the GPIOA  clock
-
 	__HAL_RCC_GPIOI_CLK_ENABLE();  	 // enable the GPIOI clock
-	__HAL_RCC_TIM1_CLK_ENABLE();  	 // we need to enable the TIM1
+	__HAL_RCC_TIM2_CLK_ENABLE();  	 // we need to enable the TIM1
 
 
-	My_led_init(GPIOA, GPIO_PIN_0);
-	//My_button_init(GPIOI, GPIO_PIN_11);
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
-	My_timer_init();
+	My_PWM_led_init(GPIOA, GPIO_PIN_0);
+	My_PWM_timer_init();
 
 
-	HAL_NVIC_SetPriority(TIM1_UP_TIM10_IRQn, 0x0F, 0x00);
-	HAL_NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
+	HAL_NVIC_SetPriority(TIM2_IRQn, 0x0F, 0x00);
+	HAL_NVIC_EnableIRQ(TIM2_IRQn);
 
 	printf("\n-----------------WELCOME-----------------\r\n");
 	printf("**********in STATIC interrupts WS**********\r\n\n");
 
-	while (1) {
-
-		if(TIM1->CNT == 0){
-
-			printf("HELLO\r\n", TIM1->CNT );
-
+	int dirUp = 1;
+		while (1) {
+			if (TIM2->CCR1 == 3500) {
+				dirUp = 0;
+			}
+			if (TIM2->CCR1 == 500) {
+				dirUp = 1;
+			}
+			TIM2->CCR1 = dirUp ? (TIM2->CCR1 + 1) : (TIM2->CCR1 - 1);
+			HAL_Delay(1);
 		}
 
-	}
 }
 
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-	  sConfig.Pulse = 1000;
+void TIM2_IRQHandler() {
+	HAL_TIM_IRQHandler(&TimHandle);
 }
+
+void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim){
+	/*repetition--;
+		if (repetition == 0) {
+			HAL_TIM_PWM_Stop_IT(&TimHandle, TIM_CHANNEL_1);
+		}
+		printf("PWM pulse finished\r\n");*/
+	}
+
 
 /**
  * @brief  Retargets the C library printf function to the USART.
@@ -275,7 +302,7 @@ static void SystemClock_Config(void) {
 	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
 	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
 	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV8;
+	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_7) != HAL_OK) {
 		Error_Handler();
 	}
