@@ -49,7 +49,6 @@
 
 /* Private typedef -----------------------------------------------------------*/
 GPIO_InitTypeDef D14Config;                              // configure GPIOs for I2C data and clock lines
-GPIO_InitTypeDef D15Config;                              // configure GPIOs for I2C data and clock lines
 I2C_HandleTypeDef I2cHandle;
 
 /* Private define ------------------------------------------------------------*/
@@ -109,14 +108,7 @@ int main(void) {
 	/* Configure the System clock to have a frequency of 216 MHz */
 	SystemClock_Config();
 
-	void clock_enables();
-
-
-	BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_EXTI);
-
-	/* Add your application code here
-	 */
-	BSP_LED_Init(LED_GREEN);
+	/* Add your application code here*/
 
 	uart_handle.Init.BaudRate = 115200;
 	uart_handle.Init.WordLength = UART_WORDLENGTH_8B;
@@ -129,18 +121,23 @@ int main(void) {
 
 	clock_enables();
 	gpio_config();
-	gpio_config();
-
+	i2c_config();
 
 	printf("\n-----------------WELCOME-----------------\r\n");
-	printf("**********in STATIC interrupts WS**********\r\n\n");
+	printf("**********in STATIC Termometer WS**********\r\n\n");
 
-	while (1) {
+	uint8_t buffer1 = 0;
+	uint8_t buffer = 0;
 
-		printf("Temperature: %d");
 
+		while (1) {
 
-	}
+			HAL_I2C_Master_Transmit( &I2cHandle, 0b10010000, &buffer1, 1, 0xFFFF);
+			HAL_I2C_Master_Receive( &I2cHandle,  0b10010000, &buffer, 1, 0xFFFF);
+
+			printf("Temp: %u\n", buffer);
+			HAL_Delay(100);
+		}
 }
 
 void clock_enables() {
@@ -152,17 +149,13 @@ void clock_enables() {
 
 void gpio_config() {
 
-	D14Config.Pin 			= GPIO_PIN_9;
+	D14Config.Pin 			= GPIO_PIN_9 | GPIO_PIN_8;
 	D14Config.Mode 			= GPIO_MODE_AF_OD;
 	D14Config.Alternate     = GPIO_AF4_I2C1;
-	D14Config.Pull			= GPIO_NOPULL;
-	D14Config.Speed			= GPIO_SPEED_FREQ_HIGH;
+	D14Config.Pull			= GPIO_PULLUP;
+	D14Config.Speed			= GPIO_SPEED_HIGH;
 
-	D15Config.Pin 			= GPIO_PIN_8;
-	D15Config.Mode 			= GPIO_MODE_AF_OD;
-	D15Config.Alternate     = GPIO_AF4_I2C1;
-	D15Config.Pull			= GPIO_NOPULL;
-	D15Config.Speed			= GPIO_SPEED_FREQ_HIGH;
+	HAL_GPIO_Init(GPIOB, &D14Config);
 
 }
 
@@ -171,9 +164,7 @@ void i2c_config(){
 	I2cHandle.Instance             = I2C1;
 	I2cHandle.Init.Timing          = 0x40912732;
 	I2cHandle.Init.AddressingMode  = I2C_ADDRESSINGMODE_7BIT;
-
 	HAL_I2C_Init(&I2cHandle);
-
 }
 
 
