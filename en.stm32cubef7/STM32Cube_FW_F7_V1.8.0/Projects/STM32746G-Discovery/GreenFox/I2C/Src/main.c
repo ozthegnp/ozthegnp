@@ -48,6 +48,10 @@
  */
 
 /* Private typedef -----------------------------------------------------------*/
+GPIO_InitTypeDef D14Config;                              // configure GPIOs for I2C data and clock lines
+GPIO_InitTypeDef D15Config;                              // configure GPIOs for I2C data and clock lines
+I2C_HandleTypeDef I2cHandle;
+
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -56,6 +60,10 @@ UART_HandleTypeDef uart_handle;
 volatile uint32_t timIntPeriod;
 
 /* Private function prototypes -----------------------------------------------*/
+void gpio_config();
+void clock_enables();
+void i2c_config();
+
 
 #ifdef __GNUC__
 /* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
@@ -71,7 +79,6 @@ static void MPU_Config(void);
 static void CPU_CACHE_Enable(void);
 
 /* Private functions ---------------------------------------------------------*/
-void clock_enables();
 
 /**
  * @brief  Main program
@@ -120,20 +127,52 @@ int main(void) {
 
 	BSP_COM_Init(COM1, &uart_handle);
 
+	clock_enables();
+	gpio_config();
+	gpio_config();
+
 
 	printf("\n-----------------WELCOME-----------------\r\n");
 	printf("**********in STATIC interrupts WS**********\r\n\n");
 
 	while (1) {
 
-		BSP_LED_Toggle(LED_GREEN);
-		HAL_Delay(500);
+		printf("Temperature: %d");
 
 
 	}
 }
 
-void clock_enables(){
+void clock_enables() {
+
+	__HAL_RCC_GPIOB_CLK_ENABLE();
+	__HAL_RCC_I2C1_CLK_ENABLE();
+
+}
+
+void gpio_config() {
+
+	D14Config.Pin 			= GPIO_PIN_9;
+	D14Config.Mode 			= GPIO_MODE_AF_OD;
+	D14Config.Alternate     = GPIO_AF4_I2C1;
+	D14Config.Pull			= GPIO_NOPULL;
+	D14Config.Speed			= GPIO_SPEED_FREQ_HIGH;
+
+	D15Config.Pin 			= GPIO_PIN_8;
+	D15Config.Mode 			= GPIO_MODE_AF_OD;
+	D15Config.Alternate     = GPIO_AF4_I2C1;
+	D15Config.Pull			= GPIO_NOPULL;
+	D15Config.Speed			= GPIO_SPEED_FREQ_HIGH;
+
+}
+
+void i2c_config(){
+
+	I2cHandle.Instance             = I2C1;
+	I2cHandle.Init.Timing          = 0x40912732;
+	I2cHandle.Init.AddressingMode  = I2C_ADDRESSINGMODE_7BIT;
+
+	HAL_I2C_Init(&I2cHandle);
 
 }
 
