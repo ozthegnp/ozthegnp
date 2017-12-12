@@ -132,12 +132,23 @@ int main(void) {
 
 		while (1) {
 
-			HAL_I2C_Master_Transmit( &I2cHandle, 0b10010000, &buffer1, 1, 0xFFFF);
+			/*HAL_I2C_Master_Transmit( &I2cHandle, 0b10010000, &buffer1, 1, 0xFFFF);
 			HAL_I2C_Master_Receive( &I2cHandle,  0b10010000, &buffer, 1, 0xFFFF);
+			printf("Polling Temp: %u\n", buffer);*/
+			HAL_I2C_Master_Transmit_IT( &I2cHandle, 144, &buffer1, 1);
+			HAL_I2C_Master_Receive_IT( &I2cHandle,  144, &buffer, 1);
 
-			printf("Temp: %u\n", buffer);
-			HAL_Delay(100);
+			printf("Interrupt Temp: %u\n", buffer);
+			//HAL_Delay(100);
 		}
+}
+
+void I2C1_EV_IRQHandler(){
+	HAL_I2C_EV_IRQHandler(&I2cHandle);
+}
+
+void HAL_I2C_ErrorCallback(){
+
 }
 
 void clock_enables() {
