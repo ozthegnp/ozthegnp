@@ -48,6 +48,10 @@
  */
 
 /* Private typedef -----------------------------------------------------------*/
+UART_HandleTypeDef uart_handle;
+TIM_HandleTypeDef    TIM11_handle;           //the timer's config structure
+TIM_OC_InitTypeDef sConfig;
+
 
 /* Private define ------------------------------------------------------------*/
 #define LED_RED_PIN GPIO_PIN_7
@@ -64,6 +68,7 @@
 static void ConfigurePeripherials(void);
 static void GPIO_LED_Init(void);
 static void UART_Init();
+static void TIM11_Init(void);
 static void GPIO_LED_Init(void);
 
 #ifdef __GNUC__
@@ -90,11 +95,14 @@ int main(void) {
 
 	ConfigurePeripherials();
 
+
+
 	printf("\n-----------------WELCOME-----------------\r\n");
 	printf("**********in STATIC interrupts WS**********\r\n\n");
 
 
 	while (1) {
+
 	}
 }
 
@@ -130,12 +138,11 @@ static void ConfigurePeripherials(void) {
 
 		/* UART COm Init*/
 		UART_Init();
+		TIM11_Init();
 		GPIO_LED_Init();
 
 }
 static void UART_Init() {
-
-	UART_HandleTypeDef uart_handle;
 
 	uart_handle.Init.BaudRate = 115200;
 	uart_handle.Init.WordLength = UART_WORDLENGTH_8B;
@@ -147,17 +154,37 @@ static void UART_Init() {
 	BSP_COM_Init(COM1, &uart_handle);
 }
 
+static void TIM11_Init(void){
+    __HAL_RCC_TIM11_CLK_ENABLE();
+
+	TIM11_handle.Instance               = TIM11;
+	TIM11_handle.Init.Period            = 5000;
+	TIM11_handle.Init.Prescaler         = 57000;
+	TIM11_handle.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
+	TIM11_handle.Init.CounterMode       = TIM_COUNTERMODE_UP;
+
+	HAL_TIM_PWM_Init(&TIM11_handle);
+
+	sConfig.OCMode = TIM_OCMODE_PWM1;
+	sConfig.Pulse =  2500;
+
+	HAL_TIM_PWM_ConfigChannel(&TIM11_handle, &sConfig, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(&TIM11_handle, TIM_CHANNEL_1);
+}
+
 static void GPIO_LED_Init(void) {
     __HAL_RCC_GPIOF_CLK_ENABLE();
+
     GPIO_InitTypeDef ledPin;
-    ledPin.Mode = GPIO_MODE_OUTPUT_PP;
-    //ledPin.Alternate = GPIO_AF1_TIM2;
-    ledPin.Pull = GPIO_PULLUP;
+
+    ledPin.Mode = GPIO_MODE_AF_PP;
+    ledPin.Alternate = GPIO_AF3_TIM11;
+    ledPin.Pull = GPIO_NOPULL;
     ledPin.Speed = GPIO_SPEED_HIGH;
     ledPin.Pin = LED_RED_PIN;
+
     HAL_GPIO_Init(LED_RED_PORT, &ledPin);
 
-    BSP_LED_Init(LED_GREEN);
     HAL_GPIO_WritePin(__LED_RED__, OFF);
 }
 
