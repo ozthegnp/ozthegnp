@@ -117,7 +117,6 @@ int main(void) {
 		}
 		BSP_LED_Off(LED_GREEN);
 
-
 	}
 }
 
@@ -211,12 +210,15 @@ static void GPIO_BUTTON_Init(void) {
 
     GPIO_InitTypeDef buttonPin;
 
-    buttonPin.Mode = GPIO_MODE_INPUT;
-    buttonPin.Pull = GPIO_PULLUP;
-    buttonPin.Speed = GPIO_SPEED_LOW;
+    buttonPin.Mode = GPIO_MODE_IT_RISING;
+    buttonPin.Pull = GPIO_NOPULL;
+    buttonPin.Speed = GPIO_SPEED_FAST;
     buttonPin.Pin = BUTTON_PIN;
 
     HAL_GPIO_Init(BUTTON_PORT, &buttonPin);
+
+    HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0x0F, 0x00);
+    	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 }
 
 static void Button_Init(void){
@@ -228,12 +230,18 @@ static void IT_Config(void){
 
 }
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+
 	if(sConfig.Pulse < 500){
 		sConfig.Pulse +=  50;
 		HAL_TIM_PWM_ConfigChannel(&TIM11_handle, &sConfig, TIM_CHANNEL_1);
 		HAL_TIM_PWM_Start(&TIM11_handle, TIM_CHANNEL_1);
+	} else {
+		sConfig.Pulse =  0;
+		HAL_TIM_PWM_ConfigChannel(&TIM11_handle, &sConfig, TIM_CHANNEL_1);
+		HAL_TIM_PWM_Start(&TIM11_handle, TIM_CHANNEL_1);
 	}
 }
+
 
 
 PUTCHAR_PROTOTYPE {
