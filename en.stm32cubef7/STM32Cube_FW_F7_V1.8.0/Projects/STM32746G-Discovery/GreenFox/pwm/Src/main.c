@@ -57,7 +57,11 @@ TIM_OC_InitTypeDef sConfig;
 #define LED_RED_PIN GPIO_PIN_7
 #define LED_RED_PORT GPIOF
 
+#define BUTTON_PIN GPIO_PIN_15
+#define BUTTON_PORT GPIOA
+
 #define __LED_RED__ LED_RED_PORT, LED_RED_PIN
+#define __BUTTON__ BUTTON_PORT, BUTTON_PIN
 
 #define ON GPIO_PIN_SET
 #define OFF GPIO_PIN_RESET
@@ -70,6 +74,10 @@ static void GPIO_LED_Init(void);
 static void UART_Init();
 static void TIM11_Init(void);
 static void GPIO_LED_Init(void);
+static void IT_Config(void);
+static void Button_Init(void);
+static void GPIO_BUTTON_Init(void);
+
 
 #ifdef __GNUC__
 /* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
@@ -94,6 +102,7 @@ static void CPU_CACHE_Enable(void);
 int main(void) {
 
 	ConfigurePeripherials();
+	BSP_LED_Init(LED_GREEN);
 
 
 
@@ -102,6 +111,12 @@ int main(void) {
 
 
 	while (1) {
+
+		while(!HAL_GPIO_ReadPin(__BUTTON__)){
+			BSP_LED_On(LED_GREEN);
+		}
+		BSP_LED_Off(LED_GREEN);
+
 
 	}
 }
@@ -140,6 +155,9 @@ static void ConfigurePeripherials(void) {
 		UART_Init();
 		TIM11_Init();
 		GPIO_LED_Init();
+		GPIO_BUTTON_Init();
+		Button_Init();
+		IT_Config();
 
 }
 static void UART_Init() {
@@ -158,16 +176,16 @@ static void TIM11_Init(void){
     __HAL_RCC_TIM11_CLK_ENABLE();
 
 	TIM11_handle.Instance               = TIM11;
-	TIM11_handle.Init.Period            = 5000;
-	TIM11_handle.Init.Prescaler         = 57000;
+	TIM11_handle.Init.Period            = 500;
+	TIM11_handle.Init.Prescaler         = 5000;
 	TIM11_handle.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
 	TIM11_handle.Init.CounterMode       = TIM_COUNTERMODE_UP;
 
 	HAL_TIM_PWM_Init(&TIM11_handle);
 
 	sConfig.OCMode = TIM_OCMODE_PWM1;
-	sConfig.Pulse =  2500;
 
+	sConfig.Pulse =  0;
 	HAL_TIM_PWM_ConfigChannel(&TIM11_handle, &sConfig, TIM_CHANNEL_1);
 	HAL_TIM_PWM_Start(&TIM11_handle, TIM_CHANNEL_1);
 }
@@ -186,6 +204,35 @@ static void GPIO_LED_Init(void) {
     HAL_GPIO_Init(LED_RED_PORT, &ledPin);
 
     HAL_GPIO_WritePin(__LED_RED__, OFF);
+}
+
+static void GPIO_BUTTON_Init(void) {
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+
+    GPIO_InitTypeDef buttonPin;
+
+    buttonPin.Mode = GPIO_MODE_INPUT;
+    buttonPin.Pull = GPIO_PULLUP;
+    buttonPin.Speed = GPIO_SPEED_LOW;
+    buttonPin.Pin = BUTTON_PIN;
+
+    HAL_GPIO_Init(BUTTON_PORT, &buttonPin);
+}
+
+static void Button_Init(void){
+	BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
+}
+static void IT_Config(void){
+	HAL_NVIC_SetPriority(TIM1_UP_TIM10_IRQn, 0x0F, 0x00);
+	HAL_NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
+
+}
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+	if(sConfig.Pulse < 500){
+		sConfig.Pulse +=  50;
+		HAL_TIM_PWM_ConfigChannel(&TIM11_handle, &sConfig, TIM_CHANNEL_1);
+		HAL_TIM_PWM_Start(&TIM11_handle, TIM_CHANNEL_1);
+	}
 }
 
 
