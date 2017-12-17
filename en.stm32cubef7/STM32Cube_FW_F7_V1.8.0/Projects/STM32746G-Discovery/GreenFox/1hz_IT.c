@@ -193,7 +193,7 @@ int main(void) {
 
 	HAL_NVIC_SetPriority(TIM1_UP_TIM10_IRQn, 0x0F, 0x00);
 	HAL_NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
-
+	
 	printf("\n-----------------WELCOME-----------------\r\n");
 	printf("**********in STATIC interrupts WS**********\r\n\n");
 

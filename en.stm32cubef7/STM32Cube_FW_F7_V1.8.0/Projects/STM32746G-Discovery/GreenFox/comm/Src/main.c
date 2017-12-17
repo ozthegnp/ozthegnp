@@ -48,22 +48,26 @@
  */
 
 /* Private typedef -----------------------------------------------------------*/
+GPIO_InitTypeDef RedLed;
+UART_HandleTypeDef UartHandle;
+GPIO_InitTypeDef gpio_init_structure;
+
 /* Private define ------------------------------------------------------------*/
-#define USART_TX_PIN	GPIO_PIN_9
-#define USART_TX_PORT	GPIOA
-#define USART_RX_PIN	GPIO_PIN_7
-#define USART_RX_PORT	GPIOB
+#define LedPort	GPIOF
+#define LedPin 	GPIO_PIN_10
+#define __RED_LED__ LedPort, LedPin
+#define ON GPIO_PIN_SET
+#define OFF GPIO_PIN_RESET
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-UART_HandleTypeDef uart_handle;
-
-volatile uint32_t timIntPeriod;
 
 /* Private function prototypes -----------------------------------------------*/
-void My_USART_Init();
-void readline(char *line);
-void writeline(char *line);
+void Uart_Handle();
+void Uart_Init();
+void RedLed_Init();
+void Read_Input(char *Input);
+void Write_Output(char *Input);
 
 #ifdef __GNUC__
 /* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
@@ -79,6 +83,8 @@ static void MPU_Config(void);
 static void CPU_CACHE_Enable(void);
 
 /* Private functions ---------------------------------------------------------*/
+
+
 
 /**
  * @brief  Main program
@@ -109,114 +115,144 @@ int main(void) {
 	/* Configure the System clock to have a frequency of 216 MHz */
 	SystemClock_Config();
 
+    /* Enable GPIO clock */
+	__HAL_RCC_GPIOA_CLK_ENABLE();
+	__HAL_RCC_GPIOB_CLK_ENABLE();
+	__HAL_RCC_GPIOF_CLK_ENABLE();
+
+    /* Enable USART clock */
+    __HAL_RCC_USART1_CLK_ENABLE();
+
+    //Uart init
+    Uart_Init();
+
+    //Uart config
+    Uart_Handle();
+
+    //Init Redled
+	RedLed_Init();
+
 	/* Add your application code here
 	 */
-	My_USART_Init();
+
 	BSP_LED_Init(LED_GREEN);
 
-	printf("\n------------------WELCOME-------------------\r\n");
-	printf("*********in STATIC communication WS*********\r\n\n");
+    HAL_NVIC_SetPriority(USART1_IRQn, 0x0F, 0x00);
+    HAL_NVIC_EnableIRQ(USART1_IRQn);
 
-	BSP_LED_Off(LED_GREEN);
 
-	char cmd[100];
-	while (1)
-	{
-		readline(cmd);
-		writeline(cmd);
+//	BSP_LED_Init(LED_GREEN);
 
-		if (strcmp(cmd, "on\n") == 0) {
+	printf("\n-----------------WELCOME-----------------\r\n");
+	printf("**********in STATIC Serial Comm project**********\r\n\n");
+
+
+//	setvbuf(stdin, NULL, _IONBF, 0);
+
+//	  HAL_GPIO_TogglePin(GPIOF, GPIO_PIN_10);
+//	  HAL_Delay(1000);
+
+	char User_Input[100];
+
+	while (1) {
+
+//		BSP_LED_On(LED_GREEN);
+
+		Read_Input(User_Input);
+		if (strcmp (User_Input, "on\n") == 0) {
+//			HAL_GPIO_WritePin(__RED_LED__, ON);
 			BSP_LED_On(LED_GREEN);
-		} else if (strcmp(cmd, "off\n") == 0) {
+
+		} else if (strcmp (User_Input, "off\n") == 0) {
+//			HAL_GPIO_WritePin(__RED_LED__, OFF);
 			BSP_LED_Off(LED_GREEN);
+
 		} else {
-			for (unsigned int i = 0; i < 7; ++i) {
+			for (int i = 0; i < 6; i++) {
 				BSP_LED_Toggle(LED_GREEN);
-				HAL_Delay(100);
+				HAL_Delay(500);
 			}
 		}
 
-		cmd[0] = '\0';
+		Write_Output(User_Input);
+		User_Input[0] = '\0';
 	}
 }
 
-void readline(char *line)
-{
-	unsigned int length = 0;
-	line[0] = '\0';
+//void USART1_IRQHandler(){
+//	HAL_USART_IRQHandler(GPIO_PIN_7);
+//}
+
+//void USART1_Callback
+
+void RedLed_Init(){
+
+	GPIO_InitTypeDef RedLed;
+
+    RedLed.Pin = LedPin;
+    RedLed.Mode = GPIO_MODE_OUTPUT_PP;
+    RedLed.Pull = GPIO_PULLDOWN;
+    RedLed.Speed = GPIO_SPEED_HIGH;
+
+    HAL_GPIO_Init(LedPort, &RedLed);
+}
+
+void Uart_Init(){
+
+//	GPIO_InitTypeDef gpio_init_structure;
+
+
+    /* Configure USART Tx as alternate function */
+    gpio_init_structure.Pin = GPIO_PIN_9;
+    gpio_init_structure.Mode = GPIO_MODE_AF_PP;
+    gpio_init_structure.Speed = GPIO_SPEED_FAST;
+    gpio_init_structure.Pull = GPIO_PULLUP;
+    gpio_init_structure.Alternate = GPIO_AF7_USART1;
+    HAL_GPIO_Init(GPIOA, &gpio_init_structure);
+
+    /* Configure USART Rx as alternate function */
+    gpio_init_structure.Pin = GPIO_PIN_7;
+    gpio_init_structure.Mode = GPIO_MODE_AF_PP;
+    gpio_init_structure.Alternate = GPIO_AF7_USART1;
+    HAL_GPIO_Init(GPIOB, &gpio_init_structure);
+
+}
+void Uart_Handle(){
+//	UART_HandleTypeDef UartHandle;
+
+	UartHandle.Instance = USART1;
+    UartHandle.Init.BaudRate = 9600;
+    UartHandle.Init.WordLength = UART_WORDLENGTH_8B;
+    UartHandle.Init.StopBits = UART_STOPBITS_1;
+    UartHandle.Init.Parity = UART_PARITY_NONE;
+    UartHandle.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+    UartHandle.Init.Mode = UART_MODE_TX_RX;
+
+    HAL_UART_Init(&UartHandle);
+}
+
+void Read_Input(char *Input) {
+	unsigned int size = 0;
+	Input[0] = '\0';
 
 	do {
-		HAL_UART_Receive(&uart_handle, (uint8_t *) &line[length], 1, HAL_MAX_DELAY);
-		++length;
-	} while (line[length-1] != '\n');
+		HAL_UART_Receive(&UartHandle, (uint8_t *) &Input[size], 1, 0xFFFF);
+		size++;
+	} while (Input[size - 1] != '\n');
 
-	line[length] = '\0';
+	Input[size] = '\0';
 }
 
-void writeline(char *line)
-{
-	HAL_UART_Transmit(&uart_handle, (uint8_t *) line, strlen(line), 100);
-
-}
-
-
-void My_USART_Init(UART_HandleTypeDef *huart)
-{
-	GPIO_InitTypeDef gpio_init_structure;
-
-	//Tx GPIO port enable
-	__HAL_RCC_GPIOA_CLK_ENABLE();
-
-	//Rx GPIO port enable
-	__HAL_RCC_GPIOB_CLK_ENABLE();
-
-	//USART clock enable
-	__HAL_RCC_USART1_CLK_ENABLE();
-
-	gpio_init_structure.Pin = USART_TX_PIN;
-	gpio_init_structure.Mode = GPIO_MODE_AF_PP;
-	gpio_init_structure.Speed = GPIO_SPEED_FAST;
-	gpio_init_structure.Pull = GPIO_PULLUP;
-	gpio_init_structure.Alternate = GPIO_AF7_USART1;
-	HAL_GPIO_Init(USART_TX_PORT, &gpio_init_structure);
-
-	gpio_init_structure.Pin = USART_RX_PIN;
-	gpio_init_structure.Alternate = GPIO_AF7_USART1;
-	HAL_GPIO_Init(USART_RX_PORT, &gpio_init_structure);
-
-	uart_handle.Init.BaudRate = 115200;
-	uart_handle.Init.WordLength = UART_WORDLENGTH_8B;
-	uart_handle.Init.StopBits = UART_STOPBITS_1;
-	uart_handle.Init.Parity = UART_PARITY_NONE;
-	uart_handle.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-	uart_handle.Init.Mode = UART_MODE_TX_RX;
-	uart_handle.Instance = USART1;
-	HAL_UART_Init(&uart_handle);
+void Write_Output(char *Input) {
+	unsigned int i = 0;
+	while (Input[i] != '\0') {
+		HAL_UART_Transmit(&UartHandle, (uint8_t *) &Input[i], 1, 0xFFFF);
+		i++;
+	}
 }
 
 
 
-/*
-int _read(int file, char *result, size_t len) {
-    HAL_StatusTypeDef status;
-    int retcode = 0;
-    if (len != 0) {
-        status = HAL_UART_Receive( &uart_handle, (uint8_t *) result, len, HAL_MAX_DELAY);
-        if (status == HAL_OK) {
-            retcode = len;
-        } else {
-            retcode = -1;
-        }
-    }
-    return( retcode);
-}
-*/
-/*
-int _write(int file, char *outgoing, int len) {
-  HAL_UART_Transmit(&uart_handle, (uint8_t *) outgoing, len, 100);
-  return len;
-}
-*/
 /**
  * @brief  Retargets the C library printf function to the USART.
  * @param  None
@@ -225,7 +261,7 @@ int _write(int file, char *outgoing, int len) {
 PUTCHAR_PROTOTYPE {
 	/* Place your implementation of fputc here */
 	/* e.g. write a character to the EVAL_COM1 and Loop until the end of transmission */
-	HAL_UART_Transmit(&uart_handle, (uint8_t *) &ch, 1, 0xFFFF);
+	HAL_UART_Transmit(&UartHandle, (uint8_t *) &ch, 1, 0xFFFF);
 
 	return ch;
 }

@@ -118,7 +118,7 @@ int main(void) {
 	uart_handle.Init.Mode = UART_MODE_TX_RX;
 
 	BSP_COM_Init(COM1, &uart_handle);
-
+	
 	clock_enables();
 	gpio_config();
 	i2c_config();
