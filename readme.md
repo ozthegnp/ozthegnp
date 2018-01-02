@@ -29,8 +29,8 @@
 
 | :white_check_mark: **Week 7** | |:white_check_mark: **Week 8**||
 | ---- |---- |----- |----- |
-| :sun_with_face: Day 1: |Stress training and Practice   | :sun_with_face: Day 1: |[C++, Introduction](https://github.com/greenfox-academy/ozthegnp/tree/master/week-08/day-1)|
-| :sun_with_face: Day 2: |[Practice day](https://github.com/greenfox-academy/ozthegnp/tree/master/week-07)|:sun_with_face: Day 2: |[C++, OOP](https://github.com/greenfox-academy/ozthegnp/tree/master/week-08/day-2)|
-| :palm_tree: Day 3: |National Holiday|:sun_with_face: Day 3: |[C++, OOP 2](https://github.com/greenfox-academy/ozthegnp/tree/master/week-08/day-3)|
-| :sun_with_face: Day 4: |[Practice day](https://github.com/greenfox-academy/ozthegnp/tree/master/week-07)|:sun_with_face: Day 4: |C++ CLI Calculator|
-| :sun_with_face: Day 5: |[1st Exam](https://github.com/ozthegnp/static-foundation-exam-1st)|:sun_with_face: Day 5: |C++ CLI Calculator|
+| :sun_with_face: Day 1: |C++ error Handling   | :sun_with_face: Day 1: |[LED-blinker & Push button tasks](https://github.com/greenfox-academy/ozthegnp/tree/master/week-08/day-1)|
+| :sun_with_face: Day 2: |[ C++ function/operator overloading](https://github.com/greenfox-academy/ozthegnp/tree/master/week-07)|:sun_with_face: Day 2: |[CGPIO, bitwise operations](https://github.com/greenfox-academy/ozthegnp/tree/master/week-08/day-2)|
+| :palm_tree: Day 3: |ATM Simutator in C++ OOP|:sun_with_face: Day 3: |[Practice day](https://github.com/greenfox-academy/ozthegnp/tree/master/week-08/day-3)|
+| :sun_with_face: Day 4: |[Temperature Logger Server Board: STM32](https://github.com/greenfox-academy/ozthegnp/tree/master/week-07)|:sun_with_face: Day 4: |Reaction Game|
+| :sun_with_face: Day 5: |[Temperature Logger Server Board: STM32](https://github.com/ozthegnp/static-foundation-exam-1st)|:sun_with_face: Day 5: |Reaction Game|
