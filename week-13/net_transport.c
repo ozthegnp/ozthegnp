@@ -48,7 +48,6 @@ int net_Init(NetTransportContext *ctx) {
 	tcpip_init(NULL, NULL);
 
 	net_LwIPNetifConfig();
-
 	if (netif_is_up(&net_context->connection.netInterface)) {
 		/* Update DHCP state machine */
 		DHCP_NetifUp();
@@ -330,10 +329,10 @@ int net_Send(NetTransportContext *ctx, const char* buffer,
 		return RC_ERROR;
 	}
 
-	/*closing and deleting the existing netconn, so we can receive data*/
+	/*closing and deleting the existing netconn, so we can receive data
 	NET_MSG("close and delete netconn\r\n");
 	rc = netconn_close(ctx->connection.conn);
-	rc = netconn_delete(ctx->connection.conn);
+	rc = netconn_delete(ctx->connection.conn);*/
 
 	NET_EXIT("net_Send", RC_SUCCESS, 0);
 	return totalSent;
@@ -343,7 +342,6 @@ int net_Receive(NetTransportContext *ctx, const char* buffer,
 		const uint32_t bufferSz, uint32_t timeoutMs) {
 	NET_ENTER("net_Receive");
 
-	ctx->connection.conn = netconn_new(NETCONN_UDP);
 	ip_addr_t local_address;
 	uint16_t local_port;
 
