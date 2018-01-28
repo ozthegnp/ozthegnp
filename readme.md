@@ -44,7 +44,7 @@
 | :sun_with_face: Day 4: |[Timer PWM Project](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox/timer_pwm)|:sun_with_face: Day 4: |Practice day|
 | :sun_with_face: Day 5: |[Timer PWM Project 2](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox/timer_pwm)|:sun_with_face: Day 5: |[2nd Exam](https://github.com/ozthegnp/static-orientation-exam-1st)|
 
-| :white_check_mark: **Week 9** |LabView week|
+| :white_check_mark: **Week 11** |LabView week|
 | ---- |---- |
 | :sun_with_face: Day 1: |[8 switches](https://github.com/greenfox-academy/ozthegnp/tree/master/week_11)||
 | :sun_with_face: Day 2: |[Converter](https://github.com/greenfox-academy/ozthegnp/tree/master/week_11)||
