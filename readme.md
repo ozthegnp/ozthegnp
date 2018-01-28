@@ -45,7 +45,7 @@
 | :sun_with_face: Day 5: |[Timer PWM Project 2](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox/timer_pwm)|:sun_with_face: Day 5: |[2nd Exam](https://github.com/ozthegnp/static-orientation-exam-1st)|
 
 | :white_check_mark: **Week 9** |
-| ---- |---- |
+| ---- |
 | :sun_with_face: Day 1: |[STM32 PWM](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox/pwm)|
 | :sun_with_face: Day 2: |[ GPIO Interrupts](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox/interrupts)|
 | :sun_with_face: Day 3: |[LED Dynamo](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox/interrupts) |
