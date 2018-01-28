@@ -47,7 +47,7 @@
 | :white_check_mark: **Week 9** |LabView week|
 | ---- |---- |
 | :sun_with_face: Day 1: |[8 switches](https://github.com/greenfox-academy/ozthegnp/tree/master/week_11)||
-| :sun_with_face: Day 2: |[Converter](https://github.com/greenfox-academy/ozthegnp/tree/master/week_11|)||
+| :sun_with_face: Day 2: |[Converter](https://github.com/greenfox-academy/ozthegnp/tree/master/week_11)||
 | :sun_with_face: Day 3: |[Error Handler](https://github.com/greenfox-academy/ozthegnp/tree/master/week_11) ||
 | :sun_with_face: Day 4: |[Number converter](https://github.com/greenfox-academy/ozthegnp/tree/master/week_11)||
 | :sun_with_face: Day 5: |[Simon says project](https://github.com/greenfox-academy/ozthegnp/tree/master/week_11)||
