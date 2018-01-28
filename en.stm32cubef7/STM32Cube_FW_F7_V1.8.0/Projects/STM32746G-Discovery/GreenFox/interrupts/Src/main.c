@@ -134,8 +134,6 @@ int main(void) {
 
 	char command[3];
 
-	//gets(command);
-
 	while (1) {
 
 	}
@@ -150,7 +148,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 }
 
 void My_led_init(GPIO_TypeDef *port, uint32_t pin_number) {
-
 
 	led.Pin = pin_number;            // this is about PIN 0
 	led.Mode = GPIO_MODE_OUTPUT_PP; // Configure as output with push-up-down enabled

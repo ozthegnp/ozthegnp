@@ -72,7 +72,6 @@ int main(void) {
 				Interrupt_Timer_Init(10000);
 				printf("Opened\n");
 				while(state == 0){}
-				//HAL_Delay(1000);
 				break;
 			case 1:			//closing
 				printf("Closing\n");
@@ -157,33 +156,6 @@ void UART_Config() {
 	uart_handle.Init.Mode = UART_MODE_TX_RX;
 
 	BSP_COM_Init(COM1, &uart_handle);
-
-	/*
-	 * UART config without BSP_COM_Init"
-	 *
-	GPIO_InitTypeDef TX;
-	GPIO_InitTypeDef RX;
-
-	__HAL_RCC_GPIOB_CLK_ENABLE();
-	__HAL_RCC_GPIOA_CLK_ENABLE();
-	__HAL_RCC_USART1_CLK_ENABLE();
-
-	TX.Pin = GPIO_PIN_9;
-	TX.Mode = GPIO_MODE_AF_PP;
-	TX.Speed = GPIO_SPEED_FAST;
-	TX.Pull = GPIO_PULLUP;
-	TX.Alternate = GPIO_AF7_USART1;
-
-	RX.Pin = GPIO_PIN_7;
-	RX.Mode = GPIO_MODE_AF_PP;
-	RX.Speed = GPIO_SPEED_FAST;
-	RX.Pull = GPIO_PULLUP;
-	RX.Alternate = GPIO_AF7_USART1;
-
-
-	HAL_GPIO_Init(GPIOA, &TX);
-	HAL_GPIO_Init(GPIOB, &RX);
-	HAL_UART_Init(&uart_handle);*/
 
 }
 
@@ -355,4 +327,3 @@ void assert_failed(uint8_t* file, uint32_t line)
  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-

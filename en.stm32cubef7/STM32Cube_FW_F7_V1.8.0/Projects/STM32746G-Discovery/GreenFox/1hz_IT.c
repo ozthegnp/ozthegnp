@@ -83,7 +83,6 @@ void My_led_init(GPIO_TypeDef *port, uint32_t pin_number) {
 
 void My_PWM_led_init(GPIO_TypeDef *port, uint32_t pin_number) {
 
-
 	led.Pin = pin_number;            // this is about PIN 0
 	led.Mode = GPIO_MODE_AF_PP; // Configure as output with push-up-down enabled
 	led.Pull = GPIO_NOPULL;        // the push-up-down should work as pulldown
@@ -193,7 +192,7 @@ int main(void) {
 
 	HAL_NVIC_SetPriority(TIM1_UP_TIM10_IRQn, 0x0F, 0x00);
 	HAL_NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
-	
+
 	printf("\n-----------------WELCOME-----------------\r\n");
 	printf("**********in STATIC interrupts WS**********\r\n\n");
 

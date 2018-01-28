@@ -92,33 +92,33 @@ static void CPU_CACHE_Enable(void);
  * @retval None
  */
 int main(void) {
-	/* This project template calls firstly two functions in order to configure MPU feature
-	 and to enable the CPU Cache, respectively MPU_Config() and CPU_CACHE_Enable().
-	 These functions are provided as template implementation that User may integrate
-	 in his application, to enhance the performance in case of use of AXI interface
-	 with several masters. */
+		/* This project template calls firstly two functions in order to configure MPU feature
+		 and to enable the CPU Cache, respectively MPU_Config() and CPU_CACHE_Enable().
+		 These functions are provided as template implementation that User may integrate
+		 in his application, to enhance the performance in case of use of AXI interface
+		 with several masters. */
 
-	/* Configure the MPU attributes as Write Through */
-	MPU_Config();
+		/* Configure the MPU attributes as Write Through */
+		MPU_Config();
 
-	/* Enable the CPU Cache */
-	CPU_CACHE_Enable();
+		/* Enable the CPU Cache */
+		CPU_CACHE_Enable();
 
-	/* STM32F7xx HAL library initialization:
-	 - Configure the Flash ART accelerator on ITCM interface
-	 - Configure the Systick to generate an interrupt each 1 msec
-	 - Set NVIC Group Priority to 4
-	 - Low Level Initialization
-	 */
-	HAL_Init();
+		/* STM32F7xx HAL library initialization:
+		 - Configure the Flash ART accelerator on ITCM interface
+		 - Configure the Systick to generate an interrupt each 1 msec
+		 - Set NVIC Group Priority to 4
+		 - Low Level Initialization
+		 */
+		HAL_Init();
 
-	/* Configure the System clock to have a frequency of 216 MHz */
-	SystemClock_Config();
+		/* Configure the System clock to have a frequency of 216 MHz */
+		SystemClock_Config();
 
     /* Enable GPIO clock */
-	__HAL_RCC_GPIOA_CLK_ENABLE();
-	__HAL_RCC_GPIOB_CLK_ENABLE();
-	__HAL_RCC_GPIOF_CLK_ENABLE();
+	  __HAL_RCC_GPIOA_CLK_ENABLE();
+	  __HAL_RCC_GPIOB_CLK_ENABLE();
+	  __HAL_RCC_GPIOF_CLK_ENABLE();
 
     /* Enable USART clock */
     __HAL_RCC_USART1_CLK_ENABLE();
@@ -130,34 +130,27 @@ int main(void) {
     Uart_Handle();
 
     //Init Redled
-	RedLed_Init();
+	  RedLed_Init();
 
-	/* Add your application code here
-	 */
+		/* Add your application code here
+		 */
 
-	BSP_LED_Init(LED_GREEN);
+		BSP_LED_Init(LED_GREEN);
 
     HAL_NVIC_SetPriority(USART1_IRQn, 0x0F, 0x00);
     HAL_NVIC_EnableIRQ(USART1_IRQn);
 
 
-//	BSP_LED_Init(LED_GREEN);
+		//	BSP_LED_Init(LED_GREEN);
 
-	printf("\n-----------------WELCOME-----------------\r\n");
-	printf("**********in STATIC Serial Comm project**********\r\n\n");
-
-
-//	setvbuf(stdin, NULL, _IONBF, 0);
-
-//	  HAL_GPIO_TogglePin(GPIOF, GPIO_PIN_10);
-//	  HAL_Delay(1000);
+		printf("\n-----------------WELCOME-----------------\r\n");
+		printf("**********in STATIC Serial Comm project**********\r\n\n");
 
 	char User_Input[100];
 
 	while (1) {
 
 //		BSP_LED_On(LED_GREEN);
-
 		Read_Input(User_Input);
 		if (strcmp (User_Input, "on\n") == 0) {
 //			HAL_GPIO_WritePin(__RED_LED__, ON);
@@ -178,12 +171,6 @@ int main(void) {
 		User_Input[0] = '\0';
 	}
 }
-
-//void USART1_IRQHandler(){
-//	HAL_USART_IRQHandler(GPIO_PIN_7);
-//}
-
-//void USART1_Callback
 
 void RedLed_Init(){
 
