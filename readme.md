@@ -31,7 +31,7 @@
 | ---- |---- |----- |----- |
 | :sun_with_face: Day 1: |[C++ error Handling](https://github.com/greenfox-academy/ozthegnp/tree/master/week-07/day-1)   | :sun_with_face: Day 1: |[LED-blinker & Push button tasks](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox)|
 | :sun_with_face: Day 2: |[ C++ function/operator overloading](https://github.com/greenfox-academy/ozthegnp/tree/master/week-07/day-2)|:sun_with_face: Day 2: |[GPIO, bitwise operations](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox)|
-| :palm_tree: Day 3: |[ATM Simutator in C++ OOP](https://github.com/greenfox-academy/ozthegnp/tree/master/week-07/day-3) |:sun_with_face: Day 3: |[Practice day](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox)|
+| :sun_with_face: Day 3: |[ATM Simutator in C++ OOP](https://github.com/greenfox-academy/ozthegnp/tree/master/week-07/day-3) |:sun_with_face: Day 3: |[Practice day](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox)|
 | :sun_with_face: Day 4: |[Temperature Logger Server Board: STM32](https://github.com/greenfox-academy/ozthegnp/tree/master/week-07/day-4)|:sun_with_face: Day 4: |[Reaction Game](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox/reaction_game)|
 | :sun_with_face: Day 5: |[Temperature Logger Server Board: STM32](https://github.com/greenfox-academy/ozthegnp/tree/master/week-07/day-4)|:sun_with_face: Day 5: |[Reaction Game](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox/reaction_game)|
 
@@ -40,6 +40,10 @@
 | ---- |---- |----- |----- |
 | :sun_with_face: Day 1: |[STM32 PWM](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox/pwm)   | :sun_with_face: Day 1: |[Communication with UART](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox/comm)|
 | :sun_with_face: Day 2: |[ GPIO Interrupts](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox/interrupts)|:sun_with_face: Day 2: |[I2C](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox/I2C)|
-| :palm_tree: Day 3: |[LED Dynamo](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox/interrupts) |:sun_with_face: Day 3: |Practice day|
+| :sun_with_face: Day 3: |[LED Dynamo](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox/interrupts) |:sun_with_face: Day 3: |Practice day|
 | :sun_with_face: Day 4: |[Timer PWM Project](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox/timer_pwm)|:sun_with_face: Day 4: |Practice day|
-| :sun_with_face: Day 5: |[Timer PWM Project 2](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox/timer_pwm)|:sun_with_face: Day 5: |2nd Exam|
+| :sun_with_face: Day 5: |[Timer PWM Project 2](https://github.com/greenfox-academy/ozthegnp/tree/master/en.stm32cubef7/STM32Cube_FW_F7_V1.8.0/Projects/STM32746G-Discovery/GreenFox/timer_pwm)|:sun_with_face: Day 5: |[2nd Exam](https://github.com/ozthegnp/static-orientation-exam-1st)|
+
+# 2018, Starting Project phase
+
+[Smarthome project - Team Aventurin](https://github.com/greenfox-academy/aventurin)
