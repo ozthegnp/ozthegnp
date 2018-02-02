@@ -1,78 +1,41 @@
-//
-//  main.c
-//  play
-//
-//  Created by Oz on 1/31/18.
-//  Copyright © 2018 Oscar Inc. All rights reserved.
-//
-
 #include <stdio.h>
 #include <string.h>
 
+/* Oscar Mateo
+ * Final exam
+ * 2018 02. 02.
+ * Task 2: Create a function that reverses a string
+ */
 
-int main(int argc, const char * argv[]) {
+
+//prototyping function
+void reverse_string(char string[], int length);
+
+int main() {
+    char string[255];
+    puts("Enter a string:");
+    gets(string);
     
-    char string_array[20][1024];
-    int array_position = 0;
-    char string[] = "Oscar vagyok\r\n\r\nNorbi vagyok\r\n\r\n1\r\n\r\nIgy kezdokdik el,";
-    char string2[] = " es igy folytatodik\r\n\r\nNorbi vagyok\r\n\r\nFaszom\r\n\r\nGecyi\r\n\r\n";
-    int flag = 0;
-    char *position;
-    int index = 0;
-    printf("%s\n", string);
-    position = strstr(string, "\r\n\r\n");
-
-        while( position != 0){
-            
-
-        index = (int)(position - string);
-       
-        strncpy(string_array[array_position], string, index);
-        string_array[array_position][index] = '\0';
-            if(flag == 1){
-                strcat(string_array[array_position - 1 ], string_array[array_position]);
-                array_position--;
-                flag = 0;
-            }
-
-        printf("%d\n", index);
-        printf("string array[%d]: %s\n", array_position, string_array[array_position]);
-        
-        memmove(&string[0], &string[index + 4], strlen(string));
-        printf("Remainder string: %s\n", string);
-        array_position++;
-        position = strstr(string, "\r\n\r\n");
-            if(position == NULL){
-                flag = 1;
-                strcpy(string_array[array_position], string);
-                array_position++;
-            }
-
-        }
+    //Determing the length of the string and storing it in a variable
+    int string_length = (int) strlen(string);
     
-    printf("-------------------------------\n");
-    position = strstr(string2, "\r\n\r\n");
-
-    while( position != 0){
-        
-        
-        index = (int)(position - string2);
-        
-        strncpy(string_array[array_position], string2, index);
-        string_array[array_position][index] = '\0';
-        if(flag == 1){
-            strcat(string_array[array_position - 1 ], string_array[array_position]);
-            array_position--;
-            flag = 0;
-        }
-        
-        printf("%d\n", index);
-        printf("string array [%d]: %s\n", array_position, string_array[array_position]);
-        
-        memmove(&string2[0], &string2[index + 4], strlen(string2));
-        printf("Remainder string: %s\n", string2);
-        array_position++;
-        position = strstr(string2, "\r\n\r\n");
-       
-    }
+    //Passing the string and the length to the function
+    reverse_string(string, string_length);
+    
+    return 0;
 }
+
+void reverse_string(char string[], int length)
+{
+    printf("Your string reversed is:\n");
+
+    for(int i = length - 1; i >= 0; i--){
+        printf("%c", string[i]);
+        //adding an extra \n to make the string look nice
+        if(i == 0){
+            printf("\n");
+        }
+    }
+    
+}
+
