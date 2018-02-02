@@ -11,6 +11,16 @@
 void reverse_string(char string[], int length);
 
 int main() {
+  char string[255];
+    puts("Enter a string:");
+    gets(string);
+
+    //Determing the length of the string and storing it in a variable
+    int string_length = (int) strlen(string);
+
+    //Passing the string and the length to the function
+    reverse_string(string, string_length);
+
     return 0;
 }
 
