@@ -7,11 +7,11 @@
  * Task 2: Create a function that reverses a string
  */
 
- //prototyping function
+//prototyping function
 void reverse_string(char string[], int length);
 
 int main() {
-  char string[255];
+    char string[255];
     puts("Enter a string:");
     gets(string);
 
@@ -35,5 +35,4 @@ void reverse_string(char string[], int length)
             printf("\n");
         }
     }
-
 }
