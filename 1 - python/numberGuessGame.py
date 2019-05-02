@@ -4,7 +4,7 @@ from random import randint
 random_number = randint(1, 10)
 print random_number
 
-# Set number of tries
+# Set number of tries   
 guesses_left = 3
 
 print "Welcome to number guess game!"
