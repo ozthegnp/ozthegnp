@@ -15,10 +15,10 @@ def read_dna(dna_file):
 
 def dna_codons(dna):
   codons = []
+  for i in range(0, len(dna), 3):
+    if (i + 3) < len(dna):
+      codons.append(dna[i:i + 3])
+  return codons
 
-  for i in range(:len(dna):3):
-    if i > len(dna):
-      break
 
-
-dna_codons(read_dna("suspect1.txt"))
+print dna_codons(read_dna("suspect1.txt"))
