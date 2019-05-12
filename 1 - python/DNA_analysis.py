@@ -20,5 +20,23 @@ def dna_codons(dna):
       codons.append(dna[i:i + 3])
   return codons
 
+def match_dna(dna):
+  matches = 0
+  for codon in dna:
+    if codon in sample:
+      matches += 1
+  return matches
 
-print dna_codons(read_dna("suspect1.txt"))
+def is_criminal(dna_sample):
+  dna_data = read_dna(dna_sample)
+  codons = dna_codons(dna_data)
+  num_matches = match_dna(codons)
+
+  if num_matches >= 3:
+    print num_matches, "The investigation shall continue"
+  else:
+    print "The suspect can be free"
+
+is_criminal("suspect1.txt")
+is_criminal("suspect2.txt")
+is_criminal("suspect3.txt")
